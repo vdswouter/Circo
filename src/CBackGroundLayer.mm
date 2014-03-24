@@ -154,6 +154,9 @@ void CBackGroundLayer::tweetLoaded(float &f) {
     //start fade
     bShowTwitter = true;
     
+    bTwitterTimerReached = false;
+    twitterStartTime = ofGetElapsedTimeMillis();
+    twitterEndTime = ofRandom(15000,25000);
 }
 
 
