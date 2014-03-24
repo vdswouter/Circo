@@ -56,4 +56,10 @@ private:
     void            tweetLoaded(float &f);
 
     bool            bShowTwitter;
+    
+    
+    int twitterStartTime;
+    int twitterEndTime;
+    bool bTwitterTimerReached;
+
 };

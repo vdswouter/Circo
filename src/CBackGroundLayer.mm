@@ -49,6 +49,7 @@ void CBackGroundLayer::setup() {
     ofAddListener(CLoadTweet::getInstance()->tweetLoaded, this, &CBackGroundLayer::tweetLoaded);
     
     bShowTwitter = false;
+    bTwitterTimerReached = true;
 }
 
 void CBackGroundLayer::startWithBAndPicture() {
@@ -67,7 +68,12 @@ void CBackGroundLayer::startWithBAndPicture() {
 }
 
 void CBackGroundLayer::update() {
+    int timer = ofGetElapsedTimeMillis() - twitterStartTime;
     
+    if(timer >= twitterEndTime && !bTwitterTimerReached) {
+        bTwitterTimerReached = true;
+        bShowTwitter = false;
+    }
 }
 
 void CBackGroundLayer::draw() {

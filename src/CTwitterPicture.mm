@@ -35,7 +35,7 @@ void CTwitterPicture::changeImage(string _path) {
     
     image.loadImage(_path);
 
-    contrastfbo.begin();
+    /*contrastfbo.begin();
     contrastshader.begin();
     contrastshader.setUniform1f("contrast", 4);
     contrastshader.setUniform1f("alpha", 1);
@@ -48,6 +48,15 @@ void CTwitterPicture::changeImage(string _path) {
     bwshader.setUniform1f("alpha", 1);
     contrastfbo.draw(0, 0);
     bwshader.end();
+    current.end();*/
+    
+    current.begin();
+    contrastshader.begin();
+    contrastshader.setUniform1f("contrast", 4);
+    contrastshader.setUniform1f("alpha", 0.4);
+    image.draw(0, 0, ofGetWidth(),ofGetHeight());
+    contrastshader.end();
     current.end();
+    
 
 }
