@@ -125,7 +125,7 @@ void CBackGroundLayer::timerTriggerDone(float &f) {
 
 
 void CBackGroundLayer::fadeInCurrent() {
-    fadeinval+=0.001;
+    fadeinval+=0.003;
     
     if (fadeinval>=0.4) {
         bdoTransitionIn = false;
@@ -138,7 +138,7 @@ void CBackGroundLayer::fadeInCurrent() {
 
 
 void CBackGroundLayer::fadeOutPrev() {
-    fadeoutval-=0.001;
+    fadeoutval-=0.003;
     if (fadeoutval<=0) {
         bdoTransitionOut = false;
     }
