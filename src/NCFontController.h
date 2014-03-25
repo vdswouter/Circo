@@ -16,6 +16,8 @@ public:
     
     ofTrueTypeFont nanum30;
     
+    ofTrueTypeFont nanum24;
+    
     
     void setup();
 

@@ -101,7 +101,7 @@ void CBackGroundLayer::timerTriggerDone(float &f) {
         
         int decider = CRandomGen::random_in_range_int(0, 101);
         
-        if (decider>50) {
+        if (decider>30) {
             bandpicture.changeImage();
             current = &bandpicture.current;
             
@@ -153,10 +153,9 @@ void CBackGroundLayer::tweetLoaded(float &f) {
     current = &twitterpicture.current;
     //start fade
     bShowTwitter = true;
-    
     bTwitterTimerReached = false;
     twitterStartTime = ofGetElapsedTimeMillis();
-    twitterEndTime = ofRandom(15000,25000);
+    twitterEndTime = ofRandom(8000,12000);
 }
 
 

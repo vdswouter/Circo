@@ -11,75 +11,76 @@
 
 void CTrackView::setHitAreasIphone4NonRetina() {
    
-    sam.x = 145/2;
-    sam.y = 170/2;
+    sam.x = 140/2;
+    sam.y = 238/2;
     
-    nightfever.x = 145/2;
-    nightfever.y = 250/2;
+    nightfever.x = 140/2;
+    nightfever.y = 312/2;
     
-    rejected.x = 145/2;
-    rejected.y = 330/2;
+    rejected.x = 140/2;
+    rejected.y = 386/2;
     
-    onebyone.x = 145/2;
-    onebyone.y = 410/2;
+    onebyone.x = 140/2;
+    onebyone.y = 460/2;
     
-    neverwanted.x = 145/2;
-    neverwanted.y = 490/2;
+    neverwanted.x = 140/2;
+    neverwanted.y = 534/2;
     
-    dragonking.x = 540/2;
-    dragonking.y = 170/2;
+    dragonking.x = 572/2;
+    dragonking.y = 238/2;
     
-    crazynights.x = 540/2;
-    crazynights.y = 250/2;
+    crazynights.x = 572/2;
+    crazynights.y = 312/2;
     
-    broken.x = 540/2;
-    broken.y = 330/2;
+    broken.x = 572/2;
+    broken.y = 386/2;
     
-    quijesuis.x = 540/2;
-    quijesuis.y = 410/2;
+    quijesuis.x = 572/2;
+    quijesuis.y = 460/2;
     
-    ambassador.x = 540/2;
-    ambassador.y = 490/2;
+    ambassador.x = 572/2;
+    ambassador.y = 534/2;
     
-    closecross.x = 870/2;
-    closecross.y = 10/2;
+    closecross.x = 33/2;
+    closecross.y = 17/2;
     
     
 }
 
 void CTrackView::setHitAreasIphone5NonRetina() {
-    sam.x = 230/2;
-    sam.y = 180/2;
     
-    nightfever.x = 230/2;
-    nightfever.y = 260/2;
+    sam.x = 238/2;
+    sam.y = 238/2;
     
-    rejected.x = 230/2;
-    rejected.y = 340/2;
+    nightfever.x = 238/2;
+    nightfever.y = 312/2;
     
-    onebyone.x = 230/2;
-    onebyone.y = 420/2;
+    rejected.x = 238/2;
+    rejected.y = 386/2;
     
-    neverwanted.x = 230/2;
-    neverwanted.y = 510/2;
+    onebyone.x = 238/2;
+    onebyone.y = 460/2;
     
-    dragonking.x = 620/2;
-    dragonking.y = 180/2;
+    neverwanted.x = 238/2;
+    neverwanted.y = 534/2;
     
-    crazynights.x = 620/2;
-    crazynights.y = 260/2;
+    dragonking.x = 669/2;
+    dragonking.y = 238/2;
     
-    broken.x = 620/2;
-    broken.y = 340/2;
+    crazynights.x = 669/2;
+    crazynights.y = 312/2;
     
-    quijesuis.x = 620/2;
-    quijesuis.y = 420/2;
+    broken.x = 669/2;
+    broken.y = 386/2;
     
-    ambassador.x = 620/2;
-    ambassador.y = 510/2;
+    quijesuis.x = 669/2;
+    quijesuis.y = 460/2;
     
-    closecross.x = 1035/2;
-    closecross.y = 25/2;
+    ambassador.x = 669/2;
+    ambassador.y = 534/2;
+    
+    closecross.x = 33/2;
+    closecross.y = 17/2;
 
     
 }
@@ -87,17 +88,20 @@ void CTrackView::setHitAreasIphone5NonRetina() {
 
 void CTrackView::setup() {
     
-    onebyone = ofRectangle(0, 0, 300/2,60/2);
-    crazynights = ofRectangle(0, 0, 300/2,60/2);
-    nightfever = ofRectangle(0, 0, 300/2,60/2);
-    sam = ofRectangle(0, 0, 300/2,60/2);
-    rejected = ofRectangle(0, 0, 300/2,60/2);
-    dragonking = ofRectangle(0, 0, 300/2,60/2);
-    broken = ofRectangle(0, 0, 300/2,60/2);
-    ambassador = ofRectangle(0, 0, 300/2,60/2);
-    quijesuis = ofRectangle(0, 0, 300/2,60/2);
-    neverwanted = ofRectangle(0, 0, 300/2,60/2);
-    closecross = ofRectangle(0,0,80/2,80/2);
+    float width = 252;
+    float height = 56;
+    
+    onebyone = ofRectangle(0, 0, width/2,height/2);
+    crazynights = ofRectangle(0, 0, width/2,height/2);
+    nightfever = ofRectangle(0, 0, width/2,height/2);
+    sam = ofRectangle(0, 0, width/2,60/2);
+    rejected = ofRectangle(0, 0, width/2,height/2);
+    dragonking = ofRectangle(0, 0, width/2,height/2);
+    broken = ofRectangle(0, 0, width/2,height/2);
+    ambassador = ofRectangle(0, 0, width/2,height/2);
+    quijesuis = ofRectangle(0, 0, width/2,height/2);
+    neverwanted = ofRectangle(0, 0, width/2,height/2);
+    closecross = ofRectangle(0,0,90/2,90/2);
     
     if (CPhoneDetector::detectPhone() == C_IPHONE_4_NON_RETINA) {
         image.loadImage("images/trackscreen_4_retina.png");
@@ -174,7 +178,8 @@ void CTrackView::draw() {
     ofRect(quijesuis);
     ofRect(neverwanted);
     
-    ofRect(closecross);*/
+    ofRect(closecross);
+    */
     
     ofSetColor(255, 255, 255,255);
     

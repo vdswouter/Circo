@@ -10,36 +10,40 @@
 
 void CQueView::setHitAreasIphone4NonRetina() {
     
-    touchrectanglevote.x = 55;
-    touchrectanglevote.y = 145;
     
-    touchrectangleque.x= 200;
-    touchrectangleque.y = 145;
+    lmrbutton.x=843/2;
+    lmrbutton.y=18/2;
     
-    touchrectangletracks.x = 345;
-    touchrectangletracks.y = 145;
+    closecross.x = 33/2;
+    closecross.y = 17/2;
+    
+    fbbutton.x = 155/2;
+    fbbutton.y = 535/2;
+    
 }
 
 void CQueView::setHitAreasIphone5NonRetina() {
     
-    touchrectanglevote.x = 100;
-    touchrectanglevote.y = 145;
+    lmrbutton.x=1017/2;
+    lmrbutton.y=25/2;
     
-    touchrectangleque.x= 240;
-    touchrectangleque.y = 145;
+    closecross.x = 33/2;
+    closecross.y = 17/2;
     
-    touchrectangletracks.x = 385;
-    touchrectangletracks.y = 145;
+    fbbutton.x = 269/2;
+    fbbutton.y = 551/2;
+
 }
 
 
 void CQueView::setup() {
     
     
-    touchrectanglevote = ofRectangle(0, 0, 80, 100);
-    touchrectangleque = ofRectangle(0,0,80,100);
-    touchrectangletracks = ofRectangle(0,0,80,100);
+    closecross = ofRectangle(0,0,90/2,90/2);
+    fbbutton = ofRectangle(0,0,658/2,72/2);
+    lmrbutton = ofRectangle(0,0,90/2,90/2);
     
+    blmrscreenselected = false;
     
     if (CPhoneDetector::detectPhone() == C_IPHONE_4_NON_RETINA) {
         image.loadImage("images/quescreen_4_retina.png");
@@ -102,15 +106,49 @@ void CQueView::draw() {
     
     ofDisableAlphaBlending();
     
+     //ofRect(closecross);
+     //ofRect(fbbutton);
+     //ofRect(lmrbutton);
+    
+    
+    if (lmrview!=NULL) {
+        lmrview->draw();
+    }
+     
+    
     ofSetColor(255, 255, 255,255);
     
 }
 
 
 void CQueView::touchDown(ofTouchEventArgs & touch) {
-    if (!fadeout) {
-        fadeout = true;
+    
+    
+    if(!blmrscreenselected) {
+        
+        if(lmrbutton.inside(touch.x, touch.y)) {
+            
+            blmrscreenselected = true;
+            lmrview = new CLMRView();
+            lmrview->setup();
+            ofAddListener(lmrview->removeView ,this,&CQueView::removeThisView);
+            
+        } else if (closecross.inside(touch.x, touch.y)) {
+            if (!fadeout) {
+                fadeout = true;
+            }
+        } else if (fbbutton.inside(touch.x, touch.y)) {
+            NSURL *facebookURL = [NSURL URLWithString:@"fb://profile/57654651250"];
+            if ([[UIApplication sharedApplication] canOpenURL:facebookURL]) {
+                [[UIApplication sharedApplication] openURL:facebookURL];
+            } else {
+                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://facebook.com"]];
+            }
+        } else {
+            
+        }
     }
+    
 }
 void CQueView::touchMoved(ofTouchEventArgs & touch) {
     
@@ -124,3 +162,17 @@ void CQueView::touchDoubleTap(ofTouchEventArgs & touch) {
 void CQueView::touchCancelled(ofTouchEventArgs & touch) {
     
 }
+
+void CQueView::removeThisView(float &f) {
+    
+    if (f==6) {
+        ofRemoveListener(lmrview->removeView ,this,&CQueView::removeThisView);
+        delete lmrview;
+        lmrview = NULL;
+    }
+    
+   
+    blmrscreenselected = false;
+    
+}
+

@@ -2,92 +2,101 @@
 
 void CVoteView::setHitAreasIphone4NonRetina() {
     
-    sam.x = 120/2;
-    sam.y = 280/2;
+    sam.x = 140/2;
+    sam.y = 238/2;
     
-    nightfever.x = 120/2;
-    nightfever.y = 351/2;
+    nightfever.x = 140/2;
+    nightfever.y = 312/2;
     
-    rejected.x = 120/2;
-    rejected.y = 425/2;
+    rejected.x = 140/2;
+    rejected.y = 386/2;
     
-    onebyone.x = 120/2;
-    onebyone.y = 500/2;
+    onebyone.x = 140/2;
+    onebyone.y = 460/2;
     
-    neverwanted.x = 120/2;
-    neverwanted.y = 570/2;
+    neverwanted.x = 140/2;
+    neverwanted.y = 534/2;
     
-    dragonking.x = 550/2;
-    dragonking.y = 280/2;
+    dragonking.x = 572/2;
+    dragonking.y = 238/2;
     
-    crazynights.x = 550/2;
-    crazynights.y = 351/2;
+    crazynights.x = 572/2;
+    crazynights.y = 312/2;
     
-    broken.x = 550/2;
-    broken.y = 425/2;
+    broken.x = 572/2;
+    broken.y = 386/2;
     
-    quijesuis.x = 550/2;
-    quijesuis.y = 500/2;
+    quijesuis.x = 572/2;
+    quijesuis.y = 460/2;
     
-    ambassador.x = 550/2;
-    ambassador.y = 570/2;
+    ambassador.x = 572/2;
+    ambassador.y = 534/2;
     
-    closecross.x = 870/2;
-    closecross.y = 10/2;
-
-   
+    closecross.x = 33/2;
+    closecross.y = 17/2;
+    
+    xposvotenumber =360/2;
+    yposvotenumber =190/2;
+    
 }
 
 void CVoteView::setHitAreasIphone5NonRetina() {
-    sam.x = 142/2;
-    sam.y = 270/2;
+    sam.x = 238/2;
+    sam.y = 238/2;
     
-    nightfever.x = 142/2;
-    nightfever.y = 345/2;
+    nightfever.x = 238/2;
+    nightfever.y = 312/2;
     
-    rejected.x = 142/2;
-    rejected.y = 415/2;
+    rejected.x = 238/2;
+    rejected.y = 386/2;
     
-    onebyone.x = 142/2;
-    onebyone.y = 490/2;
+    onebyone.x = 238/2;
+    onebyone.y = 460/2;
     
-    neverwanted.x = 142/2;
-    neverwanted.y = 560/2;
+    neverwanted.x = 238/2;
+    neverwanted.y = 534/2;
     
-    dragonking.x = 600/2;
-    dragonking.y = 272/2;
+    dragonking.x = 669/2;
+    dragonking.y = 238/2;
     
-    crazynights.x = 600/2;
-    crazynights.y = 345/2;
+    crazynights.x = 669/2;
+    crazynights.y = 312/2;
     
-    broken.x = 600/2;
-    broken.y = 420/2;
+    broken.x = 669/2;
+    broken.y = 386/2;
     
-    quijesuis.x = 600/2;
-    quijesuis.y = 490/2;
+    quijesuis.x = 669/2;
+    quijesuis.y = 460/2;
     
-    ambassador.x = 600/2;
-    ambassador.y = 560/2;
-
-    closecross.x = 1035/2;
-    closecross.y = 25/2;
-   
+    ambassador.x = 669/2;
+    ambassador.y = 534/2;
+    
+    closecross.x = 33/2;
+    closecross.y = 17/2;
+    
+    xposvotenumber =410/2;
+    yposvotenumber =195/2;
+    
 }
 
 
 void CVoteView::setup() {
     
-    onebyone = ofRectangle(0, 0, 300/2,60/2);
-    crazynights = ofRectangle(0, 0, 300/2,60/2);
-    nightfever = ofRectangle(0, 0, 300/2,60/2);
-    sam = ofRectangle(0, 0, 300/2,60/2);
-    rejected = ofRectangle(0, 0, 300/2,60/2);
-    dragonking = ofRectangle(0, 0, 300/2,60/2);
-    broken = ofRectangle(0, 0, 300/2,60/2);
-    ambassador = ofRectangle(0, 0, 300/2,60/2);
-    quijesuis = ofRectangle(0, 0, 300/2,60/2);
-    neverwanted = ofRectangle(0, 0, 300/2,60/2);
-    closecross = ofRectangle(0,0,80/2,80/2);
+    float width = 252;
+    float height = 56;
+    
+    onebyone = ofRectangle(0, 0, width/2,height/2);
+    crazynights = ofRectangle(0, 0, width/2,height/2);
+    nightfever = ofRectangle(0, 0, width/2,height/2);
+    sam = ofRectangle(0, 0, width/2,60/2);
+    rejected = ofRectangle(0, 0, width/2,height/2);
+    dragonking = ofRectangle(0, 0, width/2,height/2);
+    broken = ofRectangle(0, 0, width/2,height/2);
+    ambassador = ofRectangle(0, 0, width/2,height/2);
+    quijesuis = ofRectangle(0, 0, width/2,height/2);
+    neverwanted = ofRectangle(0, 0, width/2,height/2);
+    closecross = ofRectangle(0,0,90/2,90/2);
+    
     
     if (CPhoneDetector::detectPhone() == C_IPHONE_4_NON_RETINA) {
         image.loadImage("images/votscreen_4_retina.png");
@@ -149,15 +158,14 @@ void CVoteView::draw() {
     
     image.draw(0, 0, ofGetWidth(),ofGetHeight());
     
-    
     for (int i=0;i<[[[CPersistantData sharedManager] tempvotes]count];++i) {
         
         
-       string incoming = string([[[[CPersistantData sharedManager] tempvotes] objectAtIndex:i] UTF8String]);
+        string incoming = string([[[[CPersistantData sharedManager] tempvotes] objectAtIndex:i] UTF8String]);
         
         
         if (incoming=="sam") {
-             star.draw(sam.x-(65/2), sam.y-6, 65/2,60/2);
+            star.draw(sam.x-(65/2), sam.y-6, 65/2,60/2);
         }
         
         if (incoming=="nightfever") {
@@ -195,13 +203,16 @@ void CVoteView::draw() {
         if (incoming=="ambassador") {
             star.draw(ambassador.x-(65/2), ambassador.y-6, 65/2,60/2);
         }
-
-        
     }
+    
+    ofSetColor(255, 200, 50, fadeval);
+    
+    int count = 5-[[[CPersistantData sharedManager] tempvotes]count];
+    NCFontController::getInstance()->nanum24.drawString(ofToString(count), xposvotenumber, yposvotenumber);
     
     ofDisableAlphaBlending();
     
-     /*ofRect(onebyone);
+    /*ofRect(onebyone);
      ofRect(crazynights);
      ofRect(nightfever);
      ofRect(sam);
@@ -219,58 +230,79 @@ void CVoteView::draw() {
 
 
 void CVoteView::touchDown(ofTouchEventArgs & touch) {
+
     if(sam.inside(touch.x, touch.y)) {
         
         if([[[CPersistantData sharedManager] tempvotes] count]<5) {
-        
-        [[[CPersistantData sharedManager] tempvotes] addObject:@"sam"];
+            
+            if (!checkifVoteIsClicked(@"sam")) {
+                [[[CPersistantData sharedManager] tempvotes] addObject:@"sam"];
+            }
             
         }
     } else if (nightfever.inside(touch.x, touch.y)) {
-         if([[[CPersistantData sharedManager] tempvotes] count]<5) {
-        [[[CPersistantData sharedManager] tempvotes] addObject:@"nightfever"];
-         }
-
+        if([[[CPersistantData sharedManager] tempvotes] count]<5) {
+            if (!checkifVoteIsClicked(@"nightfever")) {
+                [[[CPersistantData sharedManager] tempvotes] addObject:@"nightfever"];
+            }
+        }
+        
         
     } else if (rejected.inside(touch.x, touch.y)) {
-         if([[[CPersistantData sharedManager] tempvotes] count]<5) {
-         [[[CPersistantData sharedManager] tempvotes] addObject:@"rejected"];
-         }
+        if([[[CPersistantData sharedManager] tempvotes] count]<5) {
+            if (!checkifVoteIsClicked(@"rejected")) {
+                [[[CPersistantData sharedManager] tempvotes] addObject:@"rejected"];
+            }
+        }
         
     } else if (onebyone.inside(touch.x, touch.y)) {
-         if([[[CPersistantData sharedManager] tempvotes] count]<5) {
-         [[[CPersistantData sharedManager] tempvotes] addObject:@"onebyone"];
-         }
+        if([[[CPersistantData sharedManager] tempvotes] count]<5) {
+            if (!checkifVoteIsClicked(@"onebyone")) {
+                [[[CPersistantData sharedManager] tempvotes] addObject:@"onebyone"];
+            }
+        }
         
     } else if (neverwanted.inside(touch.x, touch.y)) {
-         if([[[CPersistantData sharedManager] tempvotes] count]<5) {
-         [[[CPersistantData sharedManager] tempvotes] addObject:@"neverwanted"];
-         }
+        if([[[CPersistantData sharedManager] tempvotes] count]<5) {
+            if (!checkifVoteIsClicked(@"neverwanted")) {
+                [[[CPersistantData sharedManager] tempvotes] addObject:@"neverwanted"];
+            }
+        }
         
     } else if (dragonking.inside(touch.x, touch.y)) {
-         if([[[CPersistantData sharedManager] tempvotes] count]<5) {
-          [[[CPersistantData sharedManager] tempvotes] addObject:@"dragonking"];
-         }
+        if([[[CPersistantData sharedManager] tempvotes] count]<5) {
+            if (!checkifVoteIsClicked(@"dragonking")) {
+                [[[CPersistantData sharedManager] tempvotes] addObject:@"dragonking"];
+            }
+        }
         
     } else if (crazynights.inside(touch.x, touch.y)) {
-          if([[[CPersistantData sharedManager] tempvotes] count]<5) {
-          [[[CPersistantData sharedManager] tempvotes] addObject:@"crazynights"];
-          }
+        if([[[CPersistantData sharedManager] tempvotes] count]<5) {
+            if (!checkifVoteIsClicked(@"crazynights")) {
+                [[[CPersistantData sharedManager] tempvotes] addObject:@"crazynights"];
+            }
+        }
         
     } else if (broken.inside(touch.x, touch.y)) {
-         if([[[CPersistantData sharedManager] tempvotes] count]<5) {
-         [[[CPersistantData sharedManager] tempvotes] addObject:@"broken"];
-         }
+        if([[[CPersistantData sharedManager] tempvotes] count]<5) {
+            if (!checkifVoteIsClicked(@"broken")) {
+                [[[CPersistantData sharedManager] tempvotes] addObject:@"broken"];
+            }
+        }
         
     } else if (quijesuis.inside(touch.x, touch.y)) {
-          if([[[CPersistantData sharedManager] tempvotes] count]<5) {
-          [[[CPersistantData sharedManager] tempvotes] addObject:@"quijesuis"];
-          }
+        if([[[CPersistantData sharedManager] tempvotes] count]<5) {
+            if (!checkifVoteIsClicked(@"quijesuis")) {
+                [[[CPersistantData sharedManager] tempvotes] addObject:@"quijesuis"];
+            }
+        }
         
     } else if (ambassador.inside(touch.x, touch.y)) {
         if([[[CPersistantData sharedManager] tempvotes] count]<5) {
-         [[[CPersistantData sharedManager] tempvotes] addObject:@"ambassador"];
-        }   
+            if (!checkifVoteIsClicked(@"ambassador")) {
+                [[[CPersistantData sharedManager] tempvotes] addObject:@"ambassador"];
+            }
+        }
         
     } else if (closecross.inside(touch.x, touch.y)) {
         if (!fadeout) {
@@ -280,9 +312,27 @@ void CVoteView::touchDown(ofTouchEventArgs & touch) {
         
     }
     
-     [[CPersistantData sharedManager] saveData];
-
+    [[CPersistantData sharedManager] saveData];
+    
 }
+
+bool CVoteView::checkifVoteIsClicked(NSString *_incoming) {
+    
+    [[[CPersistantData sharedManager] tempvotes] count];
+    
+    for (int i =0; i< [[[CPersistantData sharedManager] tempvotes] count]; ++i) {
+        
+        //NSLog(@"%@",[[[CPersistantData sharedManager] tempvotes]objectAtIndex:i]);
+        
+        if ([[[[CPersistantData sharedManager] tempvotes]objectAtIndex:i] isEqualToString:_incoming]) {
+            return true;
+        }
+        
+    }
+    
+    return false;
+}
+
 void CVoteView::touchMoved(ofTouchEventArgs & touch) {
     
 }

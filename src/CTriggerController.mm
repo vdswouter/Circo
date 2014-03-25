@@ -26,7 +26,7 @@ CTriggerController* CTriggerController::getInstance() {
 void CTriggerController::setup() {
     
     twittertimer.setup(120000, 240000);
-    ctimer.setup(10000,20000);
+    ctimer.setup(10000,15000);
     //ofAddListener(ofEvents().update, this, &CTriggerController::onUpdate);
     //ofAddListener(ofEvents().draw, this, &CTriggerController::onDraw);
     ofAddListener(ctimer.timerDone ,this,&CTriggerController::timerDone);

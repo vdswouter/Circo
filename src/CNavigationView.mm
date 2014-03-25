@@ -25,25 +25,25 @@ void CNavigationView::stopTimer() {
 void CNavigationView::setHitAreasIphone4NonRetina() {
     
     touchrectanglevote.x = 55;
-    touchrectanglevote.y = 115;
+    touchrectanglevote.y = 110;
     
     touchrectangleque.x= 200;
-    touchrectangleque.y = 115;
+    touchrectangleque.y = 110;
     
     touchrectangletracks.x = 345;
-    touchrectangletracks.y = 115;
+    touchrectangletracks.y = 110;
 }
 
 void CNavigationView::setHitAreasIphone5NonRetina() {
     
     touchrectanglevote.x = 100;
-    touchrectanglevote.y = 145;
+    touchrectanglevote.y = 110;
     
     touchrectangleque.x= 240;
-    touchrectangleque.y = 145;
+    touchrectangleque.y = 110;
     
     touchrectangletracks.x = 385;
-    touchrectangletracks.y = 145;
+    touchrectangletracks.y = 110;
 }
 
 
@@ -219,5 +219,5 @@ void CNavigationView::removeView(float &f) {
         voteview = NULL;
     }
     bscreenisselected = false;
-    startTimer(1000);
+    startTimer(5000);
 }

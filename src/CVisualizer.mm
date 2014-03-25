@@ -30,7 +30,7 @@ void CVisualizer::setup() {
     //sphere.setUseVbo(true);
     setTexture("images/textures/texture.jpg");
     setScale(3);
-    setRotation(1);
+    setRotation(0.7);
     setScene(3);
 }
 

@@ -1,10 +1,8 @@
 #pragma once
 #include "ofMain.h"
 #include "CPhoneDetector.h"
-#include "CQueView.h"
-#include "CLMRView.h"
 
-class CQueView {
+class CLMRView {
     
 public:
     
@@ -33,16 +31,9 @@ private:
     bool fadeout;
     
     ofRectangle closecross;
-    ofRectangle lmrbutton;
-    ofRectangle fbbutton;
     
     
     void setHitAreasIphone4NonRetina();
     void setHitAreasIphone5NonRetina();
-    
-    CLMRView    *lmrview;
-    bool        blmrscreenselected;
-    
-    void       removeThisView(float &f);
     
 };

@@ -1,6 +1,7 @@
 #pragma once
 #include "ofMain.h"
 #include "CPhoneDetector.h"
+#include "NCFontController.h"
 
 #import "CPersistantData.h"
 
@@ -48,5 +49,10 @@ private:
     void setHitAreasIphone5NonRetina();
     
     ofImage star;
+    
+    bool checkifVoteIsClicked(NSString *_incoming);
+    
+    float xposvotenumber;
+    float yposvotenumber;
     
 };

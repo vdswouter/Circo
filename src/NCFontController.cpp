@@ -20,5 +20,6 @@ NCFontController* NCFontController::getInstance()
 void NCFontController::setup() {
     
     nanum30.loadFont("fonts/NanumScript.ttc", 30);
+    nanum24.loadFont("fonts/NanumScript.ttc", 24);
     
 }
