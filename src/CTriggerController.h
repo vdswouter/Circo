@@ -27,16 +27,17 @@ public:
     static CTriggerController* getInstance();
     
     void setup();
-    void onUpdate(ofEventArgs &data);
-    void onDraw(ofEventArgs &data);
-    
-    
+   
     void twitterTimerDone(float &f);
     void timerDone(float &f);
     
     ofEvent<float> timmerTrigger;
     
     ofEvent<float> twitterTimerTrigger;
+    
+    
+    void startTimers();
+    void stopTimers();
     
     
     

@@ -11,21 +11,25 @@
 #include "ofMain.h"
 
 class CTimer {
-    public:
+public:
     
     void setup(int _randommin, int _randommax);
     
     ofEvent<float> timerDone;
     
-    private:
+    void startTimer();
+    void stopTimer();
     
-        int startTime;
-        int endTime;
+private:
     
-        bool bTimerReached;
+    int startTime;
+    int endTime;
     
-        void onUpdate(ofEventArgs &data);
-        void onDraw(ofEventArgs &data);
+    bool bTimerReached;
+    bool bTimerIsRunning;
+    
+    void onUpdate(ofEventArgs &data);
+    void onDraw(ofEventArgs &data);
     
     int randommax;
     int randommin;

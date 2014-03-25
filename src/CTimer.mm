@@ -17,18 +17,21 @@ void CTimer::setup(int _randommin, int _randommax) {
     ofAddListener(ofEvents().update, this, &CTimer::onUpdate);
     ofAddListener(ofEvents().draw, this, &CTimer::onDraw);
     
-    startTime = ofGetElapsedTimeMillis();
-    endTime = ofRandom(randommin,randommax);
-    
+    startTimer();
 }
 
 void CTimer::onUpdate(ofEventArgs &data) {
-    if (bTimerReached) {
-        bTimerReached = false;
-        startTime = ofGetElapsedTimeMillis();
-        endTime = (int)ofRandom(randommin, randommax);
-        float f = 0;
-        ofNotifyEvent(timerDone,f,this);
+    
+    if (bTimerIsRunning) {
+        
+        if (bTimerReached) {
+            bTimerReached = false;
+            bTimerIsRunning = true;
+            startTime = ofGetElapsedTimeMillis();
+            endTime = (int)ofRandom(randommin, randommax);
+            float f = 0;
+            ofNotifyEvent(timerDone,f,this);
+        }
     }
 }
 
@@ -38,4 +41,16 @@ void CTimer::onDraw(ofEventArgs &data) {
     if(timer >= endTime && !bTimerReached) {
         bTimerReached = true;
     }
+}
+
+void CTimer::startTimer() {
+    startTime = ofGetElapsedTimeMillis();
+    endTime = ofRandom(randommin,randommax);
+    bTimerIsRunning = true;
+    bTimerReached = false;
+}
+
+void CTimer::stopTimer() {
+    bTimerIsRunning = false;
+    bTimerReached = true;
 }

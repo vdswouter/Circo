@@ -7,7 +7,7 @@ void testApp::setup(){
     
     //ofSetLogLevel(OF_LOG_SILENT);
     
-    ofSetFrameRate(60);
+    //ofSetFrameRate(60);
     
     //set orientation
     ofSetOrientation(OF_ORIENTATION_90_RIGHT);
@@ -21,10 +21,8 @@ void testApp::setup(){
     CDataModel::getInstance()->screenmode = INTRO_SCREEN;
     ofAddListener(introview->introViewDone ,this,&testApp::introscreenDone);
     
-    
     //set up visualizer
     CVisualizer::getInstance()->setup();
-    
     
     //always set up these
     //1. set up acces to phot lib. This can take a few seconds
@@ -51,6 +49,7 @@ void testApp::setup(){
     //tap timer stuff
     btapTimerIsRunning = false;
     
+    bfirstfocus = true;
 
 }
 
@@ -166,12 +165,6 @@ void testApp::touchMoved(ofTouchEventArgs & touch){
 
 //--------------------------------------------------------------
 void testApp::touchUp(ofTouchEventArgs & touch){
-    /*if (touch.id>0) {
-        if (twitterview) {
-            delete twitterview;
-            twitterview = NULL;
-        }
-    }*/
 }
 
 //--------------------------------------------------------------
@@ -192,12 +185,15 @@ void testApp::touchCancelled(ofTouchEventArgs & touch){
 
 //--------------------------------------------------------------
 void testApp::lostFocus(){
-
+    bfirstfocus = false;
+    CTriggerController::getInstance()->stopTimers();
 }
 
 //--------------------------------------------------------------
 void testApp::gotFocus(){
-
+    if (!bfirstfocus) {
+        CTriggerController::getInstance()->startTimers();
+    }
 }
 
 //--------------------------------------------------------------

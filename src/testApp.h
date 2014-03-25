@@ -73,6 +73,7 @@ class testApp : public ofxiOSApp {
         //general
         void drawCompleteScene();
         void drawCompleteSceneInFbo();
+        bool bfirstfocus;
     
 };
 

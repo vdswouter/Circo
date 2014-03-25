@@ -101,7 +101,7 @@ testApp *myApp;
     AVAudioPlayer * newAudio=[[AVAudioPlayer alloc] initWithContentsOfURL:audioFileURL error:NULL];
     self.audioPlayer = newAudio;
     
-    //self.audioPlayer.volume = 0;
+    self.audioPlayer.volume = 0;
     
     [audioPlayer release]; // release the audio safely
     

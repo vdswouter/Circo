@@ -24,22 +24,12 @@ CTriggerController* CTriggerController::getInstance() {
 
 
 void CTriggerController::setup() {
-    
     twittertimer.setup(120000, 240000);
     ctimer.setup(10000,15000);
-    //ofAddListener(ofEvents().update, this, &CTriggerController::onUpdate);
-    //ofAddListener(ofEvents().draw, this, &CTriggerController::onDraw);
     ofAddListener(ctimer.timerDone ,this,&CTriggerController::timerDone);
     ofAddListener(twittertimer.timerDone, this, &CTriggerController::twitterTimerDone);
 }
 
-void CTriggerController::onUpdate(ofEventArgs &data) {
-
-}
-
-void CTriggerController::onDraw(ofEventArgs &data) {
-   
-}
 
 void CTriggerController::timerDone(float &f) {
     ofNotifyEvent(timmerTrigger,f,this);
@@ -47,4 +37,15 @@ void CTriggerController::timerDone(float &f) {
 
 void CTriggerController::twitterTimerDone(float &f) {
     ofNotifyEvent(twitterTimerTrigger,f,this);
+}
+
+void CTriggerController::startTimers(){
+    twittertimer.startTimer();
+    ctimer.startTimer();
+}
+
+
+void CTriggerController::stopTimers() {
+    twittertimer.stopTimer();
+    ctimer.stopTimer();
 }
