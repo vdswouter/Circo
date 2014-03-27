@@ -31,6 +31,17 @@ void CDataModel::setup() {
         string mystring = "images/band/"+ofToString(i)+".jpg";
         bandpicturespaths.push_back(mystring);
     }
+    
+    songtitles.push_back("S.A.M");
+    songtitles.push_back("Nightfever");
+    songtitles.push_back("Rejected");
+    songtitles.push_back("One By One");
+    songtitles.push_back("Never Wanted");
+    songtitles.push_back("Dragon King");
+    songtitles.push_back("Crazy Nights");
+    songtitles.push_back("Broken");
+    songtitles.push_back("Qui Je Suis");
+    songtitles.push_back("Ambassador");
 }
 
 string CDataModel::getRandomBandPicture() {

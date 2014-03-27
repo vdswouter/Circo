@@ -13,6 +13,8 @@
 #include "CVisualizer.h"
 #include "CTriggerController.h"
 #include "NCFontController.h"
+#include "CSongTitleScreen.h"
+
 
 #import "OBJCDataModel.h"
 #import "CSoundPlayer.h"
@@ -62,7 +64,6 @@ class testApp : public ofxiOSApp {
         CTwitterScreen      *twitterview;
         void                twitterTimerGO(float &f);
         void                twitterScreenRemove(float &f);
-    
     
         //tap timer
         float tapstartime;

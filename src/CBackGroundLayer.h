@@ -57,9 +57,15 @@ private:
 
     bool            bShowTwitter;
     
+    void twitterPictureLoaded(float &f);
     
     int twitterStartTime;
     int twitterEndTime;
     bool bTwitterTimerReached;
+    
+    float enlargercurrent;
+    float enlargerprev;
+    
+    
 
 };

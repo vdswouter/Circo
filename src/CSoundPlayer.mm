@@ -88,6 +88,9 @@ testApp *myApp;
 
 -(void) playSongWithid:(int)incid {
     
+     fireonethirdofthesong = false;
+     firemiddleofthesong = false;
+     firethreefourthofthesong = false;
     
     currentsong = incid;
     
@@ -95,13 +98,14 @@ testApp *myApp;
     [[CPersistantData sharedManager] saveData];
     
     CVisualizer::getInstance()->songChanged();
+    CSongTitleScreen::getInstance()->songChanged();
     
     NSURL *audioFileURL = [[NSBundle mainBundle] URLForResource: [[[OBJCDataModel sharedManager] songs] objectAtIndex:incid] withExtension:@"mp3"];
     
     AVAudioPlayer * newAudio=[[AVAudioPlayer alloc] initWithContentsOfURL:audioFileURL error:NULL];
     self.audioPlayer = newAudio;
     
-    self.audioPlayer.volume = 0;
+    //self.audioPlayer.volume = 0;
     
     [audioPlayer release]; // release the audio safely
     
@@ -117,6 +121,37 @@ testApp *myApp;
     thescale = 0;
     
     if (audioPlayer.playing ) {
+        
+        //cout<<[audioPlayer currentTime]<<" "<<[audioPlayer duration]<<endl;
+        
+        if ([audioPlayer currentTime]>[audioPlayer duration]*0.3 && [audioPlayer currentTime]<([audioPlayer duration]*0.3+1)) {
+           
+            if (!fireonethirdofthesong) {
+                fireonethirdofthesong = true;
+                CSongTitleScreen::getInstance()->songChanged();
+            }
+        }
+        
+        
+        if ([audioPlayer currentTime]>[audioPlayer duration]*0.5 && [audioPlayer currentTime]<([audioPlayer duration]*0.5+1)) {
+            
+            if (!firemiddleofthesong) {
+                firemiddleofthesong = true;
+                CSongTitleScreen::getInstance()->songChanged();
+            }
+            
+        }
+        
+        if ([audioPlayer currentTime]>[audioPlayer duration]*0.7 && [audioPlayer currentTime]<([audioPlayer duration]*0.7+1)) {
+            
+            if (!firethreefourthofthesong) {
+                firethreefourthofthesong = true;
+                CSongTitleScreen::getInstance()->songChanged();
+            }
+            
+        }
+        
+        
         [audioPlayer updateMeters];
         
         float power = 0.0f;

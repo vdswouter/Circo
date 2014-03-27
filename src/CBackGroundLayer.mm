@@ -8,7 +8,6 @@
 
 #include "CBackGroundLayer.h"
 
-
 void CBackGroundLayer::setup() {
     
     if (CPhoneDetector::detectPhone() == C_IPHONE_4_NON_RETINA) {
@@ -50,6 +49,9 @@ void CBackGroundLayer::setup() {
     
     bShowTwitter = false;
     bTwitterTimerReached = true;
+    
+    enlargercurrent = 0;
+    enlargerprev = 0;
 }
 
 void CBackGroundLayer::startWithBAndPicture() {
@@ -74,14 +76,22 @@ void CBackGroundLayer::update() {
         bTwitterTimerReached = true;
         bShowTwitter = false;
     }
+    
+    //if(bShowTwitter) {
+    //twitterpicture.update();
+    //}
+
 }
 
 void CBackGroundLayer::draw() {
+    
+    enlargercurrent += 0.1;
     ofEnableAlphaBlending();
     backgroundpicture.draw(0, 0,ofGetWidth(),ofGetHeight());
     if (current) {
         if (!bdoTransitionIn && !bdoTransitionOut) {
-            current->draw(0, 0);
+            
+            current->draw(-enlargercurrent, -enlargercurrent, (float)ofGetWidth()+enlargercurrent,(float)ofGetHeight()+enlargercurrent);
         } else {
             fadeInCurrent();
             fadeOutPrev();
@@ -93,15 +103,16 @@ void CBackGroundLayer::draw() {
 void CBackGroundLayer::timerTriggerDone(float &f) {
     
     if (!bShowTwitter) {
-        
+        enlargerprev = enlargercurrent;
+       
+       
         prev->begin();
-        current->draw(0, 0);
+        current->draw(-enlargerprev, -enlargerprev, (float)ofGetWidth()+enlargerprev,(float)ofGetHeight()+enlargerprev);
         prev->end();
-        
         
         int decider = CRandomGen::random_in_range_int(0, 101);
         
-        if (decider>30) {
+        if (decider>20) {
             bandpicture.changeImage();
             current = &bandpicture.current;
             
@@ -113,13 +124,13 @@ void CBackGroundLayer::timerTriggerDone(float &f) {
                 current = &bandpicture.current;
             }
         }
-        
         //start fade
         bdoTransitionIn = true;
         bdoTransitionOut = true;
         
         fadeinval = 0;
         fadeoutval = 0.4;
+        enlargercurrent=0;
     }
 }
 
@@ -132,30 +143,45 @@ void CBackGroundLayer::fadeInCurrent() {
     }
     fadeshaderin.begin();
     fadeshaderin.setUniform1f("alpha", fadeinval);
-    current->draw(0, 0);
+    current->draw(-enlargercurrent, -enlargercurrent, (float)ofGetWidth()+enlargercurrent,(float)ofGetHeight()+enlargercurrent);
     fadeshaderin.end();
 }
 
 
 void CBackGroundLayer::fadeOutPrev() {
     fadeoutval-=0.003;
+   
     if (fadeoutval<=0) {
         bdoTransitionOut = false;
+        enlargerprev = 0;
     }
     fadeshaderout.begin();
     fadeshaderout.setUniform1f("alpha", fadeoutval);
-    prev->draw(0, 0);
+    prev->draw(-enlargerprev, -enlargerprev, (float)ofGetWidth()+enlargerprev,(float)ofGetHeight()+enlargerprev);
     fadeshaderout.end();
+    enlargerprev +=0.1;
 }
 
 void CBackGroundLayer::tweetLoaded(float &f) {
+       //ofAddListener(twitterpicture.twitterPictureLoaded, this, &CBackGroundLayer::twitterPictureLoaded);
     twitterpicture.changeImage(CLoadTweet::getInstance()->picture);
+    bShowTwitter = true;
+    
     current = &twitterpicture.current;
     //start fade
-    bShowTwitter = true;
     bTwitterTimerReached = false;
     twitterStartTime = ofGetElapsedTimeMillis();
     twitterEndTime = ofRandom(8000,12000);
+    enlargercurrent=0;
+
+}
+
+void CBackGroundLayer::twitterPictureLoaded(float &f) {
+    
+    cout<<"twitter picture loaded"<<endl;
+    
+    
+    //ofRemoveListener(twitterpicture.twitterPictureLoaded, this, &CBackGroundLayer::twitterPictureLoaded);
 }
 
 

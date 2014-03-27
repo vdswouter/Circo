@@ -37,5 +37,7 @@ public:
     void setup();
     string getRandomBandPicture();
     
+    vector<string> songtitles;
+    
     int     screenmode;
 };

@@ -26,7 +26,7 @@ CVisualizer* CVisualizer::getInstance() {
 
 void CVisualizer::setup() {
     totalscenes = 4;
-    cam.setDistance(80);
+    cam.setDistance(120);
     //sphere.setUseVbo(true);
     setTexture("images/textures/texture.jpg");
     setScale(3);
@@ -122,7 +122,7 @@ void CVisualizer::drawScene0() {
 
 }
 
-void CVisualizer::drawScene1() {
+void CVisualizer::drawScene2() {
     float __scale =(audio)*scale;
     
     int __resolution = (1.2 - audio) * 35 + 8;
@@ -168,7 +168,7 @@ void CVisualizer::drawScene1() {
     
 }
 
-void CVisualizer::drawScene2(){
+void CVisualizer::drawScene1(){
     int __resolution = (1 - audio) * 8;
     if(__resolution < 2) __resolution = 2;
     sphere.setResolution(__resolution);
@@ -197,7 +197,6 @@ void CVisualizer::drawScene2(){
             
         }
         sphere.getMesh().setFromTriangles(faces);
-        
     }
     
     sphere.draw();

@@ -13,7 +13,7 @@
 #include "ofxiOSExtras.h"
 
 #include "CDataModel.h"
-
+#include "ofxThreadedImageLoader.h"
 
 class CTwitterPicture {
     
@@ -24,6 +24,10 @@ private:
     ofShader    bwshader;
     ofShader    contrastshader;
     
+    ofxThreadedImageLoader loader;
+    
+    bool    bisAllocated;
+    
 public:
     
     ofFbo current;
@@ -31,5 +35,9 @@ public:
     void update();
     void draw();
     void changeImage(string _path);
+    
+    ofEvent<float> twitterPictureLoaded;
+    
+    
     
 };

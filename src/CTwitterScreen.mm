@@ -87,18 +87,17 @@ void CTwitterScreen::draw() {
         tweetxpos = 0;
     }
 
+    ofSetColor(252,203, 0);
+    ofRect(ofGetWidth()-tweetxpos, 22, rect.width,rect.height);
+    
+    ofSetColor(241,90, 125);
+    NCFontController::getInstance()->nanum30.drawString("ALERT! TRENDING TWEET..."+CLoadTweet::getInstance()->message+" by "+CLoadTweet::getInstance()->user, ofGetWidth()-tweetxpos, rect.height+20);
+    ofSetColor(255, 255, 255);
+    
     
     static int steptwo = ofRandom(1,3);
     
     if (ofGetFrameNum() % steptwo == 0){
-        
-        ofSetColor(252,203, 0);
-        ofRect(ofGetWidth()-tweetxpos, 22, rect.width,rect.height);
-        
-        ofSetColor(241,90, 125);
-        NCFontController::getInstance()->nanum30.drawString("ALERT! TRENDING TWEET..."+CLoadTweet::getInstance()->message+" by "+CLoadTweet::getInstance()->user, ofGetWidth()-tweetxpos, rect.height+20);
-        ofSetColor(255, 255, 255);
-        
         steptwo = ofRandom(1,3);
         ofEnableAlphaBlending();
         bones.draw(ofGetWidth()-bones.width+(bones.width/2), ofGetHeight()-bones.height, bones.width,bones.height);

@@ -8,6 +8,7 @@ void testApp::setup(){
     //ofSetLogLevel(OF_LOG_SILENT);
     
     //ofSetFrameRate(60);
+    //ofSetVerticalSync(true);
     
     //set orientation
     ofSetOrientation(OF_ORIENTATION_90_RIGHT);
@@ -113,7 +114,13 @@ void testApp::drawCompleteScene() {
         introview->draw();
     }
     
+    
     CVisualizer::getInstance()->draw();
+    
+    if (CDataModel::getInstance()->screenmode == VISUALIZER_SCREEN) {
+        CSongTitleScreen::getInstance()->draw();
+    }
+
    
     if (navigationview) {
         navigationview->draw();
@@ -223,8 +230,6 @@ void testApp::introscreenDone(float &f) {
 //--------------------------------------------------------------
 void testApp::introvoicedone() {
     //bootforreal();
-    
-    
 }
 
 void testApp::bootforreal() {

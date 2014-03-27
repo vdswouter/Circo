@@ -15,6 +15,7 @@
 #include "ofMain.h"
 #include "testApp.h"
 #include "CVisualizer.h"
+#include "CSongTitleScreen.h"
 
 #import "MeterTable.h"
 
@@ -29,6 +30,10 @@
     MeterTable meterTable;
     
     float thescale;
+    
+    bool fireonethirdofthesong;
+    bool firemiddleofthesong;
+    bool firethreefourthofthesong;
 }
 
 
