@@ -7,6 +7,7 @@
 //
 
 #include "CNavigationView.h"
+#include "CDataModel.h"
 
 void CNavigationView::startTimer(float time) {
     starttime = ofGetElapsedTimeMillis();
@@ -79,6 +80,8 @@ void CNavigationView::setup() {
     fadeval = 0.0f;
     fadeout = false;
     
+    bdoNotDraw = false;
+    
     queview =NULL;
     trackview = NULL;
     voteview = NULL;
@@ -101,15 +104,30 @@ void CNavigationView::update() {
         }
     }
     
+    if (queview!=NULL) {
+        queview->update();
+    }
+    
+    if (trackview!=NULL) {
+        trackview->update();
+    }
+    
+    if (voteview!=NULL) {
+        voteview->update();
+    }
+    
 }
 
 void CNavigationView::draw() {
+    
+    
+    if (!bdoNotDraw) {
     
     ofEnableAlphaBlending();
     if (fadein) {
         ofSetColor(255, 255, 254, fadeval);
         
-        fadeval+=6;
+        fadeval+=CDataModel::getInstance()->screenfadestep;
         
         if (fadeval>=255) {
             ofRegisterTouchEvents(this);
@@ -120,7 +138,7 @@ void CNavigationView::draw() {
     
     if (fadeout) {
         ofSetColor(255, 255, 254, fadeval);
-        fadeval -=6;
+        fadeval -=CDataModel::getInstance()->screenfadestep;
         if (fadeval<=0) {
             fadeval= 0;
             fadeout = false;
@@ -128,12 +146,14 @@ void CNavigationView::draw() {
             ofNotifyEvent(removeNavigationView, fadeval, this);
         }
     }
-    
+        
     //ofRect(touchrectangletracks);
     //ofRect(touchrectanglevote);
     //ofRect(touchrectangleque);
     
     image.draw(0, 0, ofGetWidth(),ofGetHeight());
+    }
+
     
     ofDisableAlphaBlending();
     
@@ -165,20 +185,23 @@ void CNavigationView::touchDown(ofTouchEventArgs & touch) {
             bscreenisselected = true;
             trackview = new CTrackView();
             trackview->setup();
-            ofAddListener(trackview->removeView ,this,&CNavigationView::removeView);
+            ofAddListener(trackview->removeView ,this,&CNavigationView::removeSubView);
+            ofAddListener(trackview->viewReady ,this,&CNavigationView::subViewReady);
         
             
         } else if (touchrectangleque.inside(touch.x, touch.y)) {
             bscreenisselected = true;
             queview = new CQueView();
             queview->setup();
-            ofAddListener(queview->removeView ,this,&CNavigationView::removeView);
+            ofAddListener(queview->removeView ,this,&CNavigationView::removeSubView);
+             ofAddListener(queview->viewReady ,this,&CNavigationView::subViewReady);
             
         } else if(touchrectanglevote.inside(touch.x, touch.y)) {
             bscreenisselected = true;
             voteview = new CVoteView();
             voteview->setup();
-            ofAddListener(voteview->removeView ,this,&CNavigationView::removeView);
+            ofAddListener(voteview->removeView ,this,&CNavigationView::removeSubView);
+            ofAddListener(voteview->viewReady ,this,&CNavigationView::subViewReady);
         } else {
             if (!fadeout) {
                 fadeout = true;
@@ -199,25 +222,50 @@ void CNavigationView::touchCancelled(ofTouchEventArgs & touch) {
     
 }
 
-void CNavigationView::removeView(float &f) {
+
+void CNavigationView::subViewReady(float &f) {
+    bdoNotDraw = true;
+   
     
     if (f==0) {
-        ofRemoveListener(queview->removeView ,this,&CNavigationView::removeView);
+         ofRemoveListener(queview->viewReady ,this,&CNavigationView::subViewReady);
+    }
+    
+    if (f==1) {
+        ofRemoveListener(trackview->viewReady ,this,&CNavigationView::subViewReady);
+    }
+    
+    if (f==2) {
+         ofRemoveListener(voteview->viewReady ,this,&CNavigationView::subViewReady);
+    }
+}
+
+
+void CNavigationView::removeSubView(float &f) {
+    
+    if (f==0) {
+        ofRemoveListener(queview->removeView ,this,&CNavigationView::removeSubView);
         delete queview;
         queview = NULL;
     }
     
     if (f==1) {
-        ofRemoveListener(trackview->removeView ,this,&CNavigationView::removeView);
+        ofRemoveListener(trackview->removeView ,this,&CNavigationView::removeSubView);
         delete trackview;
         trackview = NULL;
     }
     
     if (f==2) {
-        ofRemoveListener(voteview->removeView ,this,&CNavigationView::removeView);
+        ofRemoveListener(voteview->removeView ,this,&CNavigationView::removeSubView);
         delete voteview;
         voteview = NULL;
     }
-    bscreenisselected = false;
-    startTimer(5000);
+    
+    
+    ofUnregisterTouchEvents(this);
+    float faa=0;
+    ofNotifyEvent(removeNavigationView, faa, this);
+    
+    //bscreenisselected = false;
+    //startTimer(5000);
 }

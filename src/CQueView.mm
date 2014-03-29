@@ -7,9 +7,23 @@
 //
 
 #include "CQueView.h"
+#include "CDataModel.h"
+
+void CQueView::startTimer(float time) {
+    starttime = ofGetElapsedTimeMillis();
+    endtime = time;
+    bTimerReached = false;
+    bTimerIsRunning  =true;
+    
+}
+
+void CQueView::stopTimer() {
+    bTimerReached = true;
+    bTimerIsRunning  =false;
+}
+
 
 void CQueView::setHitAreasIphone4NonRetina() {
-    
     
     lmrbutton.x=843/2;
     lmrbutton.y=18/2;
@@ -32,7 +46,7 @@ void CQueView::setHitAreasIphone5NonRetina() {
     
     fbbutton.x = 269/2;
     fbbutton.y = 551/2;
-
+    
 }
 
 
@@ -68,53 +82,70 @@ void CQueView::setup() {
     fadein = true;
     fadeval = 0.0f;
     fadeout = false;
+    
+    bdoNotDraw = false;
+    
+    timertime = 18000.0f;
+    startTimer(timertime);
 }
 
 void CQueView::update() {
+    if (bTimerIsRunning) {
+        
+        int timer = ofGetElapsedTimeMillis() - starttime;
+        if(timer >= endtime && !bTimerReached) {
+            bTimerReached = true;
+            bTimerIsRunning = false;
+            startFadeOut();
+        }
+    }
     
+    if (lmrview!=NULL) {
+        lmrview->update();
+    }
+
 }
 
 void CQueView::draw() {
-    
-    ofEnableAlphaBlending();
-    if (fadein) {
-        ofSetColor(255, 255, 254, fadeval);
-        
-        fadeval+=6;
-        
-        if (fadeval>=255) {
-            ofRegisterTouchEvents(this);
-            fadeval= 255;
-            fadein = false;
-        }
-    }
-    
-    if (fadeout) {
-        ofSetColor(255, 255, 254, fadeval);
-        fadeval -=6;
-        if (fadeval<=0) {
-            fadeval= 0;
-            fadeout = false;
-            ofUnregisterTouchEvents(this);
+    if (!bdoNotDraw) {
+        ofEnableAlphaBlending();
+        if (fadein) {
+            ofSetColor(255, 255, 254, fadeval);
             
-            float f=0.0f;
-            ofNotifyEvent(removeView, f, this);
+            fadeval+=CDataModel::getInstance()->screenfadestep;
+            
+            if (fadeval>=255) {
+                ofRegisterTouchEvents(this);
+                fadeval= 255;
+                fadein = false;
+                float f=0.0f;
+                ofNotifyEvent(viewReady, f, this);
+            }
         }
+        
+        if (fadeout) {
+            ofSetColor(255, 255, 254, fadeval);
+            fadeval -=CDataModel::getInstance()->screenfadestep;
+            if (fadeval<=0) {
+                fadeval= 0;
+                fadeout = false;
+                ofUnregisterTouchEvents(this);
+                
+                float f=0.0f;
+                ofNotifyEvent(removeView, f, this);
+            }
+        }
+        
+        image.draw(0, 0, ofGetWidth(),ofGetHeight());
+        
+        ofDisableAlphaBlending();
+        
     }
-    
-    image.draw(0, 0, ofGetWidth(),ofGetHeight());
-    
-    ofDisableAlphaBlending();
-    
-     //ofRect(closecross);
-     //ofRect(fbbutton);
-     //ofRect(lmrbutton);
-    
     
     if (lmrview!=NULL) {
         lmrview->draw();
     }
-     
+    
     
     ofSetColor(255, 255, 255,255);
     
@@ -131,12 +162,12 @@ void CQueView::touchDown(ofTouchEventArgs & touch) {
             blmrscreenselected = true;
             lmrview = new CLMRView();
             lmrview->setup();
-            ofAddListener(lmrview->removeView ,this,&CQueView::removeThisView);
+            ofAddListener(lmrview->removeView ,this,&CQueView::removeSubView);
+            ofAddListener(lmrview->viewReady ,this,&CQueView::subViewReady);
+            stopTimer();
             
         } else if (closecross.inside(touch.x, touch.y)) {
-            if (!fadeout) {
-                fadeout = true;
-            }
+            startFadeOut();
         } else if (fbbutton.inside(touch.x, touch.y)) {
             NSURL *facebookURL = [NSURL URLWithString:@"fb://profile/57654651250"];
             if ([[UIApplication sharedApplication] canOpenURL:facebookURL]) {
@@ -144,12 +175,19 @@ void CQueView::touchDown(ofTouchEventArgs & touch) {
             } else {
                 [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://facebook.com"]];
             }
-        } else {
-            
         }
     }
     
 }
+
+void CQueView::startFadeOut() {
+    if (!fadeout) {
+        stopTimer();
+        fadeout = true;
+    }
+}
+
+
 void CQueView::touchMoved(ofTouchEventArgs & touch) {
     
 }
@@ -163,16 +201,21 @@ void CQueView::touchCancelled(ofTouchEventArgs & touch) {
     
 }
 
-void CQueView::removeThisView(float &f) {
+void CQueView::subViewReady(float &f) {
+    ofRemoveListener(lmrview->viewReady ,this,&CQueView::subViewReady);
+    bdoNotDraw = true;
+    
+}
+
+void CQueView::removeSubView(float &f) {
     
     if (f==6) {
-        ofRemoveListener(lmrview->removeView ,this,&CQueView::removeThisView);
+        ofRemoveListener(lmrview->removeView ,this,&CQueView::removeSubView);
         delete lmrview;
         lmrview = NULL;
     }
-    
-   
-    blmrscreenselected = false;
-    
+    ofUnregisterTouchEvents(this);
+    float ff=0.0f;
+    ofNotifyEvent(removeView, ff, this);
 }
 

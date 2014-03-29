@@ -30,27 +30,33 @@ CSongTitleScreen* CSongTitleScreen::getInstance() {
 
 void CSongTitleScreen::draw() {
     
-    if (counter<4) {
-        string song = CDataModel::getInstance()->songtitles[[[CSoundPlayer sharedManager] currentsong]];
+    
+    if (bdraw) {
         
-        ofRectangle rect = NCFontController::getInstance()->nanum30.getStringBoundingBox("you are listening to "+song+" by ..Circo",0, 0);
-        
-        textxpos+=4;
-        if (textxpos>ofGetWidth()+rect.width) {
-            textxpos = 0;
-            counter++;
+        if (counter<4) {
+            string song = CDataModel::getInstance()->songtitles[[[CSoundPlayer sharedManager] currentsong]];
+            
+            ofRectangle rect = NCFontController::getInstance()->nanum30.getStringBoundingBox("you are listening to "+song+" by ..Circo",0, 0);
+            
+            textxpos+=3;
+            if (textxpos>ofGetWidth()+rect.width) {
+                textxpos = 0;
+                counter++;
+            }
+            
+            NCFontController::getInstance()->nanum30.drawString("you are listening to "+song+" by ..Circo", ofGetWidth()-textxpos, ofGetHeight()-rect.height);
+        } else {
+            bdraw = false;
         }
-        ofEnableAlphaBlending();
-        ofEnableBlendMode(OF_BLENDMODE_ADD);
         
-        NCFontController::getInstance()->nanum30.drawString("you are listening to "+song+" by ..Circo", textxpos-rect.width, ofGetHeight()-rect.height+20);
-        ofDisableBlendMode();
-        ofDisableAlphaBlending();
     }
     
 }
 
 
 void CSongTitleScreen::songChanged() {
+    
+    cout<<"song changed buddy in song title screen"<<endl;
     counter  =0;
+    bdraw = true;
 }

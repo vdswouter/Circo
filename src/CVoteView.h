@@ -20,6 +20,7 @@ public:
     void touchCancelled(ofTouchEventArgs & touch);
     
     ofEvent<float> removeView;
+    ofEvent<float> viewReady;
     
     
 private:
@@ -30,8 +31,8 @@ private:
     
     float backgroundfadeval;
     
-    bool fadein;
-    bool fadeout;
+    bool        fadein;
+    bool        fadeout;
     
     ofRectangle onebyone;
     ofRectangle crazynights;
@@ -54,5 +55,18 @@ private:
     
     float xposvotenumber;
     float yposvotenumber;
+    
+    void startFadeOut();
+
+    
+    float       starttime;
+    float       endtime;
+    bool        bTimerReached;
+    bool        bTimerIsRunning;
+    
+    void        startTimer(float time);
+    void        stopTimer();
+    
+    float       timertime;
     
 };

@@ -19,7 +19,7 @@ public:
     void touchCancelled(ofTouchEventArgs & touch);
     
     ofEvent<float> removeView;
-    
+    ofEvent<float> viewReady;
     
 private:
     
@@ -43,6 +43,21 @@ private:
     CLMRView    *lmrview;
     bool        blmrscreenselected;
     
-    void       removeThisView(float &f);
+    void       removeSubView(float &f);
+    void       subViewReady(float &f);
+    
+    bool        bdoNotDraw;
+    
+    void        startFadeOut();
+    
+    float       starttime;
+    float       endtime;
+    bool        bTimerReached;
+    bool        bTimerIsRunning;
+    
+    void        startTimer(float time);
+    void        stopTimer();
+    
+    float       timertime;
     
 };

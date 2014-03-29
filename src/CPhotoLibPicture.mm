@@ -34,7 +34,7 @@ void CPhotoLibPicture::draw() {
 
 bool CPhotoLibPicture::changeImage() {
    
-    
+    //image.clear();
     if (ofxiOSUIImageToOFImage([[CPLibrary sharedManager] getRandomPicture], image)) {
         
         contrastfbo.begin();

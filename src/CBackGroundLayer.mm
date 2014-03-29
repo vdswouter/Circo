@@ -112,7 +112,7 @@ void CBackGroundLayer::timerTriggerDone(float &f) {
         
         int decider = CRandomGen::random_in_range_int(0, 101);
         
-        if (decider>20) {
+        if (decider>-1) {
             bandpicture.changeImage();
             current = &bandpicture.current;
             

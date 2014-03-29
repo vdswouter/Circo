@@ -39,5 +39,9 @@ public:
     
     vector<string> songtitles;
     
+    vector<string> songreferences;
+    
     int     screenmode;
+    
+    float   screenfadestep;
 };

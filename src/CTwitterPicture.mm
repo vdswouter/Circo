@@ -50,7 +50,7 @@ void CTwitterPicture::draw() {
 void CTwitterPicture::changeImage(string _path) {
     
     
-    
+    image.clear();
     image.loadImage(_path);
     //image.clear();
      bisAllocated = false;

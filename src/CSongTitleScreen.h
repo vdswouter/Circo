@@ -14,7 +14,7 @@ private:
     float               textxpos;
     static CSongTitleScreen* m_pSingleton;
     
-    int counter;
+    bool        bdraw;
     
 protected:
     CSongTitleScreen();
@@ -27,4 +27,6 @@ public:
     void draw();
     
     void songChanged();
+    
+    int counter;
 };

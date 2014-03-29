@@ -64,6 +64,8 @@ static CPersistantData *sharedMyManager = nil;
     [[NSUserDefaults standardUserDefaults] setObject:self.votes forKey:kVote];
     
     [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    [votes release];
 }
 
 -(void)loadData {

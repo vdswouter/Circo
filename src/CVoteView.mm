@@ -1,4 +1,27 @@
 #include "CVoteView.h"
+#include "CDataModel.h"
+
+
+void CVoteView::startTimer(float time) {
+    starttime = ofGetElapsedTimeMillis();
+    endtime = time;
+    bTimerReached = false;
+    bTimerIsRunning  =true;
+    
+}
+
+void CVoteView::stopTimer() {
+    bTimerReached = true;
+    bTimerIsRunning  =false;
+}
+
+void CVoteView::startFadeOut() {
+    if (!fadeout) {
+        stopTimer();
+        fadeout = true;
+    }
+}
+
 
 void CVoteView::setHitAreasIphone4NonRetina() {
     
@@ -122,11 +145,22 @@ void CVoteView::setup() {
     fadeval = 0.0f;
     fadeout = false;
     
+    timertime = 10000.0f;
+    startTimer(timertime);
+    
     star.loadImage("images/starvote.png");
 }
 
 void CVoteView::update() {
-    
+    if (bTimerIsRunning) {
+        
+        int timer = ofGetElapsedTimeMillis() - starttime;
+        if(timer >= endtime && !bTimerReached) {
+            bTimerReached = true;
+            bTimerIsRunning = false;
+            startFadeOut();
+        }
+    }
 }
 
 void CVoteView::draw() {
@@ -135,18 +169,20 @@ void CVoteView::draw() {
     if (fadein) {
         ofSetColor(255, 255, 254, fadeval);
         
-        fadeval+=6;
+        fadeval+=CDataModel::getInstance()->screenfadestep;
         
         if (fadeval>=255) {
             ofRegisterTouchEvents(this);
             fadeval= 255;
             fadein = false;
+            float f=2.0f;
+            ofNotifyEvent(viewReady, f, this);
         }
     }
     
     if (fadeout) {
         ofSetColor(255, 255, 254, fadeval);
-        fadeval -=6;
+        fadeval -=CDataModel::getInstance()->screenfadestep;
         if (fadeval<=0) {
             fadeval= 0;
             fadeout = false;
@@ -159,7 +195,6 @@ void CVoteView::draw() {
     image.draw(0, 0, ofGetWidth(),ofGetHeight());
     
     for (int i=0;i<[[[CPersistantData sharedManager] tempvotes]count];++i) {
-        
         
         string incoming = string([[[[CPersistantData sharedManager] tempvotes] objectAtIndex:i] UTF8String]);
         
@@ -233,14 +268,18 @@ void CVoteView::touchDown(ofTouchEventArgs & touch) {
 
     if(sam.inside(touch.x, touch.y)) {
         
+        stopTimer();
+        startTimer(timertime);
+        
         if([[[CPersistantData sharedManager] tempvotes] count]<5) {
-            
             if (!checkifVoteIsClicked(@"sam")) {
                 [[[CPersistantData sharedManager] tempvotes] addObject:@"sam"];
             }
             
         }
     } else if (nightfever.inside(touch.x, touch.y)) {
+        stopTimer();
+        startTimer(timertime);
         if([[[CPersistantData sharedManager] tempvotes] count]<5) {
             if (!checkifVoteIsClicked(@"nightfever")) {
                 [[[CPersistantData sharedManager] tempvotes] addObject:@"nightfever"];
@@ -249,6 +288,8 @@ void CVoteView::touchDown(ofTouchEventArgs & touch) {
         
         
     } else if (rejected.inside(touch.x, touch.y)) {
+        stopTimer();
+        startTimer(timertime);
         if([[[CPersistantData sharedManager] tempvotes] count]<5) {
             if (!checkifVoteIsClicked(@"rejected")) {
                 [[[CPersistantData sharedManager] tempvotes] addObject:@"rejected"];
@@ -256,6 +297,8 @@ void CVoteView::touchDown(ofTouchEventArgs & touch) {
         }
         
     } else if (onebyone.inside(touch.x, touch.y)) {
+        stopTimer();
+        startTimer(timertime);
         if([[[CPersistantData sharedManager] tempvotes] count]<5) {
             if (!checkifVoteIsClicked(@"onebyone")) {
                 [[[CPersistantData sharedManager] tempvotes] addObject:@"onebyone"];
@@ -263,6 +306,8 @@ void CVoteView::touchDown(ofTouchEventArgs & touch) {
         }
         
     } else if (neverwanted.inside(touch.x, touch.y)) {
+        stopTimer();
+        startTimer(timertime);
         if([[[CPersistantData sharedManager] tempvotes] count]<5) {
             if (!checkifVoteIsClicked(@"neverwanted")) {
                 [[[CPersistantData sharedManager] tempvotes] addObject:@"neverwanted"];
@@ -270,6 +315,8 @@ void CVoteView::touchDown(ofTouchEventArgs & touch) {
         }
         
     } else if (dragonking.inside(touch.x, touch.y)) {
+        stopTimer();
+        startTimer(timertime);
         if([[[CPersistantData sharedManager] tempvotes] count]<5) {
             if (!checkifVoteIsClicked(@"dragonking")) {
                 [[[CPersistantData sharedManager] tempvotes] addObject:@"dragonking"];
@@ -277,6 +324,8 @@ void CVoteView::touchDown(ofTouchEventArgs & touch) {
         }
         
     } else if (crazynights.inside(touch.x, touch.y)) {
+        stopTimer();
+        startTimer(timertime);
         if([[[CPersistantData sharedManager] tempvotes] count]<5) {
             if (!checkifVoteIsClicked(@"crazynights")) {
                 [[[CPersistantData sharedManager] tempvotes] addObject:@"crazynights"];
@@ -284,6 +333,8 @@ void CVoteView::touchDown(ofTouchEventArgs & touch) {
         }
         
     } else if (broken.inside(touch.x, touch.y)) {
+        stopTimer();
+        startTimer(timertime);
         if([[[CPersistantData sharedManager] tempvotes] count]<5) {
             if (!checkifVoteIsClicked(@"broken")) {
                 [[[CPersistantData sharedManager] tempvotes] addObject:@"broken"];
@@ -291,6 +342,8 @@ void CVoteView::touchDown(ofTouchEventArgs & touch) {
         }
         
     } else if (quijesuis.inside(touch.x, touch.y)) {
+        stopTimer();
+        startTimer(timertime);
         if([[[CPersistantData sharedManager] tempvotes] count]<5) {
             if (!checkifVoteIsClicked(@"quijesuis")) {
                 [[[CPersistantData sharedManager] tempvotes] addObject:@"quijesuis"];
@@ -298,6 +351,8 @@ void CVoteView::touchDown(ofTouchEventArgs & touch) {
         }
         
     } else if (ambassador.inside(touch.x, touch.y)) {
+        stopTimer();
+        startTimer(timertime);
         if([[[CPersistantData sharedManager] tempvotes] count]<5) {
             if (!checkifVoteIsClicked(@"ambassador")) {
                 [[[CPersistantData sharedManager] tempvotes] addObject:@"ambassador"];
@@ -305,11 +360,7 @@ void CVoteView::touchDown(ofTouchEventArgs & touch) {
         }
         
     } else if (closecross.inside(touch.x, touch.y)) {
-        if (!fadeout) {
-            fadeout = true;
-        }
-    } else {
-        
+        startFadeOut();
     }
     
     [[CPersistantData sharedManager] saveData];

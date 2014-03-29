@@ -54,7 +54,11 @@ private:
     
     bool       bscreenisselected;
     
-    void       removeView(float &f);
+    bool        bdoNotDraw;
+    
+    void       removeSubView(float &f);
+    
+    void       subViewReady(float &f);
     
     float       starttime;
     float       endtime;

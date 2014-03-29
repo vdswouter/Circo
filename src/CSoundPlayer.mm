@@ -68,11 +68,13 @@ testApp *myApp;
     [[AVAudioSession sharedInstance] setDelegate:self];
     [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:&setCategoryError];
     myApp = (testApp*)ofGetAppPtr();*/
+    
+    myApp = (testApp*)ofGetAppPtr();
 }
 
 
 -(void)playIntroVoice {
-    NSURL *audioFileURL = [[NSBundle mainBundle] URLForResource:@"sound/circo_voice_intro" withExtension:@"aiff"];
+    NSURL *audioFileURL = [[NSBundle mainBundle] URLForResource:@"sound/circo_voice_intro" withExtension:@"mp3"];
     
     AVAudioPlayer * newAudio=[[AVAudioPlayer alloc] initWithContentsOfURL:audioFileURL error:NULL];
     self.introvoiceplayer = newAudio;
@@ -124,7 +126,7 @@ testApp *myApp;
         
         //cout<<[audioPlayer currentTime]<<" "<<[audioPlayer duration]<<endl;
         
-        if ([audioPlayer currentTime]>[audioPlayer duration]*0.3 && [audioPlayer currentTime]<([audioPlayer duration]*0.3+1)) {
+        if ([audioPlayer currentTime]>[audioPlayer duration]*0.3-3 && [audioPlayer currentTime]<([audioPlayer duration]*0.3+3)) {
            
             if (!fireonethirdofthesong) {
                 fireonethirdofthesong = true;
@@ -133,7 +135,7 @@ testApp *myApp;
         }
         
         
-        if ([audioPlayer currentTime]>[audioPlayer duration]*0.5 && [audioPlayer currentTime]<([audioPlayer duration]*0.5+1)) {
+        if ([audioPlayer currentTime]>[audioPlayer duration]*0.5-3 && [audioPlayer currentTime]<([audioPlayer duration]*0.5+3)) {
             
             if (!firemiddleofthesong) {
                 firemiddleofthesong = true;
@@ -142,7 +144,7 @@ testApp *myApp;
             
         }
         
-        if ([audioPlayer currentTime]>[audioPlayer duration]*0.7 && [audioPlayer currentTime]<([audioPlayer duration]*0.7+1)) {
+        if ([audioPlayer currentTime]>[audioPlayer duration]*0.7-3 && [audioPlayer currentTime]<([audioPlayer duration]*0.7+3)) {
             
             if (!firethreefourthofthesong) {
                 firethreefourthofthesong = true;

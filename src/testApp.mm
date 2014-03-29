@@ -51,7 +51,7 @@ void testApp::setup(){
     btapTimerIsRunning = false;
     
     bfirstfocus = true;
-
+    
 }
 
 //--------------------------------------------------------------
@@ -59,18 +59,18 @@ void testApp::update(){
     
     //tap timer stuff
     if (btapTimerIsRunning) {
-    
-    int timer = ofGetElapsedTimeMillis() - tapstartime;
-    if(timer >= tapendtime && !btapTimerReached) {
-        if (CDataModel::getInstance()->screenmode == VISUALIZER_SCREEN) {
-            [[CSoundPlayer sharedManager] playNextSong];
-            
-        } else if (CDataModel::getInstance()->screenmode == VOICE_INTRO_SCREEN) {
-            bootforreal();
+        
+        int timer = ofGetElapsedTimeMillis() - tapstartime;
+        if(timer >= tapendtime && !btapTimerReached) {
+            if (CDataModel::getInstance()->screenmode == VISUALIZER_SCREEN) {
+                [[CSoundPlayer sharedManager] playNextSong];
+                
+            } else if (CDataModel::getInstance()->screenmode == VOICE_INTRO_SCREEN) {
+                bootforreal();
+            }
+            btapTimerReached = true;
+            btapTimerIsRunning = false;
         }
-        btapTimerReached = true;
-        btapTimerIsRunning = false;
-    }
     }
     
     backgroundlayer.update();
@@ -78,8 +78,7 @@ void testApp::update(){
     if (introview) {
         introview->update();
     }
-   
-
+    
     CVisualizer::getInstance()->update();
     
     if (navigationview) {
@@ -87,7 +86,6 @@ void testApp::update(){
     }
     
     if (twitterview) {
-        
         drawCompleteSceneInFbo();
         twitterview->update(mainrender);
     }
@@ -96,14 +94,14 @@ void testApp::update(){
 
 //--------------------------------------------------------------
 void testApp::draw() {
-
+    
     
     if (twitterview) {
         twitterview->draw();
     } else {
         
         drawCompleteScene();
-
+        
     }
 }
 
@@ -117,11 +115,12 @@ void testApp::drawCompleteScene() {
     
     CVisualizer::getInstance()->draw();
     
-    if (CDataModel::getInstance()->screenmode == VISUALIZER_SCREEN) {
+    
+    if (CDataModel::getInstance()->screenmode == VISUALIZER_SCREEN || CDataModel::getInstance()->screenmode == NAVIGATION_SCREEN) {
         CSongTitleScreen::getInstance()->draw();
     }
-
-   
+    
+    
     if (navigationview) {
         navigationview->draw();
     }
@@ -131,9 +130,9 @@ void testApp::drawCompleteScene() {
 //--------------------------------------------------------------
 void testApp::drawCompleteSceneInFbo() {
     mainrender.begin();
-        drawCompleteScene();
+    drawCompleteScene();
     mainrender.end();
-
+    
 }
 
 //--------------------------------------------------------------
@@ -155,11 +154,8 @@ void testApp::touchDown(ofTouchEventArgs & touch){
     }
     
     if (touch.id>0) {
-        if (twitterview==NULL) {
-            twitterview = new CTwitterScreen();
-            ofAddListener(twitterview->twitterScreenDone, this, &testApp::twitterScreenRemove);
-            twitterview->setup();
-        }
+        float f=0;
+        twitterTimerGO(f);
         
     }
 }
@@ -205,16 +201,16 @@ void testApp::gotFocus(){
 
 //--------------------------------------------------------------
 void testApp::gotMemoryWarning(){
-
+    
 }
 
 //--------------------------------------------------------------
 void testApp::deviceOrientationChanged(int newOrientation){
-
+    
 }
 //--------------------------------------------------------------
 void testApp::introscreenDone(float &f) {
-  
+    
     ofRemoveListener(introview->introViewDone ,this,&testApp::introscreenDone);
     delete introview;
     introview = NULL;
@@ -230,13 +226,14 @@ void testApp::introscreenDone(float &f) {
 //--------------------------------------------------------------
 void testApp::introvoicedone() {
     //bootforreal();
+    
 }
 
 void testApp::bootforreal() {
     
-   [[CPersistantData sharedManager] setFirstrun:true];
-   [[CPersistantData sharedManager] saveData];
-
+    [[CPersistantData sharedManager] setFirstrun:true];
+    [[CPersistantData sharedManager] saveData];
+    
     [[CSoundPlayer sharedManager]playSongWithid: [[CPersistantData sharedManager] currentsong]];
     
     CDataModel::getInstance()->screenmode = VISUALIZER_SCREEN;
@@ -251,14 +248,19 @@ void testApp::bootforreal() {
 void testApp::removeNavigationView(float &f){
     delete navigationview;
     navigationview = NULL;
-     CDataModel::getInstance()->screenmode = VISUALIZER_SCREEN;
+    CDataModel::getInstance()->screenmode = VISUALIZER_SCREEN;
 }
 
 void testApp::twitterTimerGO(float &f) {
-    if (twitterview==NULL) {
-        twitterview = new CTwitterScreen();
-        ofAddListener(twitterview->twitterScreenDone, this, &testApp::twitterScreenRemove);
-        twitterview->setup();
+
+    
+    if (CDataModel::getInstance()->screenmode == VISUALIZER_SCREEN) {
+        
+        if (twitterview==NULL) {
+            twitterview = new CTwitterScreen();
+            ofAddListener(twitterview->twitterScreenDone, this, &testApp::twitterScreenRemove);
+            twitterview->setup();
+        }
     }
 }
 

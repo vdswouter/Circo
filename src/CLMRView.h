@@ -17,7 +17,7 @@ public:
     void touchCancelled(ofTouchEventArgs & touch);
     
     ofEvent<float> removeView;
-    
+    ofEvent<float> viewReady;
     
 private:
     
@@ -35,5 +35,16 @@ private:
     
     void setHitAreasIphone4NonRetina();
     void setHitAreasIphone5NonRetina();
+    
+    
+    float       starttime;
+    float       endtime;
+    bool        bTimerReached;
+    bool        bTimerIsRunning;
+    
+    void        startTimer(float time);
+    void        stopTimer();
+    
+    float       timertime;
     
 };

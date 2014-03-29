@@ -42,6 +42,20 @@ void CDataModel::setup() {
     songtitles.push_back("Broken");
     songtitles.push_back("Qui Je Suis");
     songtitles.push_back("Ambassador");
+    
+    
+    songreferences.push_back("sam");
+    songreferences.push_back("nightfever");
+    songreferences.push_back("rejected");
+    songreferences.push_back("onebyone");
+    songreferences.push_back("neverwanted");
+    songreferences.push_back("dragonking");
+    songreferences.push_back("crazynights");
+    songreferences.push_back("broken");
+    songreferences.push_back("quijesuis");
+    songreferences.push_back("ambassador");
+    
+    screenfadestep = 6.0f;
 }
 
 string CDataModel::getRandomBandPicture() {
