@@ -66,7 +66,9 @@ void testApp::update(){
                 [[CSoundPlayer sharedManager] playNextSong];
                 
             } else if (CDataModel::getInstance()->screenmode == VOICE_INTRO_SCREEN) {
-                bootforreal();
+                if ([[CPersistantData sharedManager] firstrun]) {
+                    bootforreal();
+                }
             }
             btapTimerReached = true;
             btapTimerIsRunning = false;
@@ -226,13 +228,14 @@ void testApp::introscreenDone(float &f) {
 //--------------------------------------------------------------
 void testApp::introvoicedone() {
     //bootforreal();
+    [[CPersistantData sharedManager] setFirstrun:true];
+    [[CPersistantData sharedManager] saveData];
     
 }
 
 void testApp::bootforreal() {
     
-    [[CPersistantData sharedManager] setFirstrun:true];
-    [[CPersistantData sharedManager] saveData];
+   
     
     [[CSoundPlayer sharedManager]playSongWithid: [[CPersistantData sharedManager] currentsong]];
     
