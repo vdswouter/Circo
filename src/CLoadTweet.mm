@@ -33,6 +33,7 @@ void CLoadTweet::loadTweet() {
         Json::Value jcontent;
         jcontent = slot.get("content", jcontent);
         message = ofSplitString(jcontent.asString(), "http")[0];
+    
         //get username
         Json::Value juser;
         juser = slot.get("displayName", juser);

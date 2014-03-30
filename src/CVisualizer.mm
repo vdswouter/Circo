@@ -81,6 +81,7 @@ void CVisualizer::draw() {
 
 void CVisualizer::setTexture(string _path) {
     texture.loadImage(_path);
+    texture.mirror(true,false);
 }
 
 //--------------------------------------------------------------

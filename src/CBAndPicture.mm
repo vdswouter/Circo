@@ -52,9 +52,8 @@ void CBAndPicture::changeImage() {
     bwshader.end();
     current.end();
     
-   /* current.begin();
+    /*current.begin();
     image.draw(0, 0, ofGetWidth(), ofGetHeight());
     current.end();*/
-    
     
 }

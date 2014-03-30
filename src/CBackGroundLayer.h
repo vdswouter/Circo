@@ -8,13 +8,10 @@
 
 #pragma once
 #include "ofMain.h"
-#include "CPhotoLibPicture.h"
-#include "CBAndPicture.h"
-#include "CTwitterPicture.h"
 #include "CTriggerController.h"
 #include "CPhoneDetector.h"
-#include "CRandomGen.h"
 #include "CLoadTweet.h"
+#include "CBGContainer.h"
 
 class CBackGroundLayer {
     
@@ -32,40 +29,18 @@ class CBackGroundLayer {
     
 private:
 
-    CBAndPicture        bandpicture;
-    CPhotoLibPicture    libpicture;
-    CTwitterPicture     twitterpicture;
+    
+    CBGContainer        containerA;
+    CBGContainer        containerB;
     
     ofImage           backgroundpicture;
-    
-    ofFbo       *prev;
-    ofFbo       *current;
-    
-    void fadeOutPrev();
-    void fadeInCurrent();
-    
-    bool bdoTransitionIn;
-    bool bdoTransitionOut;
-    
-    float fadeinval;
-    float fadeoutval;
-    
-    ofShader fadeshaderin;
-    ofShader fadeshaderout;
     
     void            tweetLoaded(float &f);
 
     bool            bShowTwitter;
-    
-    void twitterPictureLoaded(float &f);
-    
+
     int twitterStartTime;
     int twitterEndTime;
     bool bTwitterTimerReached;
-    
-    float enlargercurrent;
-    float enlargerprev;
-    
-    
 
 };

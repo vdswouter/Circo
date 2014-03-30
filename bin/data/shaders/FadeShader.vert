@@ -11,7 +11,6 @@ void main(){
 	//get our current vertex position so we can modify it
 	vec4 pos = projectionMatrix * modelViewMatrix * position;
 	
-	
 	gl_Position = pos;
 
 	textureCoordinate = texcoord;
