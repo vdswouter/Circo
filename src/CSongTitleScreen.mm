@@ -30,7 +30,6 @@ CSongTitleScreen* CSongTitleScreen::getInstance() {
 
 void CSongTitleScreen::draw() {
     
-    
     if (bdraw) {
         
         if (counter<4) {
@@ -55,8 +54,6 @@ void CSongTitleScreen::draw() {
 
 
 void CSongTitleScreen::songChanged() {
-    
-    cout<<"song changed buddy in song title screen"<<endl;
     counter  =0;
     bdraw = true;
 }

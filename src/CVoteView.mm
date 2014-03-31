@@ -1,6 +1,7 @@
 #include "CVoteView.h"
 #include "CDataModel.h"
 
+#include "CVoteService.h"
 
 void CVoteView::startTimer(float time) {
     starttime = ofGetElapsedTimeMillis();
@@ -265,7 +266,7 @@ void CVoteView::draw() {
 
 
 void CVoteView::touchDown(ofTouchEventArgs & touch) {
-
+    
     if(sam.inside(touch.x, touch.y)) {
         
         stopTimer();
@@ -273,7 +274,17 @@ void CVoteView::touchDown(ofTouchEventArgs & touch) {
         
         if([[[CPersistantData sharedManager] tempvotes] count]<5) {
             if (!checkifVoteIsClicked(@"sam")) {
-                [[[CPersistantData sharedManager] tempvotes] addObject:@"sam"];
+                if (CVoteService::getInstance()->doVote(0)) {
+                    [[[CPersistantData sharedManager] tempvotes] addObject:@"sam"];
+                } else {
+                 
+                    UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:@"ROFL"
+                                                                    message:@"Dee dee doo doo."
+                                                                   delegate:nil
+                                                          cancelButtonTitle:@"OK"
+                                                          otherButtonTitles:nil] autorelease];
+                    [alert show];
+                }
             }
             
         }
@@ -282,7 +293,9 @@ void CVoteView::touchDown(ofTouchEventArgs & touch) {
         startTimer(timertime);
         if([[[CPersistantData sharedManager] tempvotes] count]<5) {
             if (!checkifVoteIsClicked(@"nightfever")) {
-                [[[CPersistantData sharedManager] tempvotes] addObject:@"nightfever"];
+                if (CVoteService::getInstance()->doVote(1)) {
+                    [[[CPersistantData sharedManager] tempvotes] addObject:@"nightfever"];
+                }
             }
         }
         
@@ -292,7 +305,9 @@ void CVoteView::touchDown(ofTouchEventArgs & touch) {
         startTimer(timertime);
         if([[[CPersistantData sharedManager] tempvotes] count]<5) {
             if (!checkifVoteIsClicked(@"rejected")) {
-                [[[CPersistantData sharedManager] tempvotes] addObject:@"rejected"];
+                if (CVoteService::getInstance()->doVote(2)) {
+                    [[[CPersistantData sharedManager] tempvotes] addObject:@"rejected"];
+                }
             }
         }
         
@@ -301,7 +316,9 @@ void CVoteView::touchDown(ofTouchEventArgs & touch) {
         startTimer(timertime);
         if([[[CPersistantData sharedManager] tempvotes] count]<5) {
             if (!checkifVoteIsClicked(@"onebyone")) {
-                [[[CPersistantData sharedManager] tempvotes] addObject:@"onebyone"];
+                if (CVoteService::getInstance()->doVote(3)) {
+                    [[[CPersistantData sharedManager] tempvotes] addObject:@"onebyone"];
+                }
             }
         }
         
@@ -310,7 +327,9 @@ void CVoteView::touchDown(ofTouchEventArgs & touch) {
         startTimer(timertime);
         if([[[CPersistantData sharedManager] tempvotes] count]<5) {
             if (!checkifVoteIsClicked(@"neverwanted")) {
-                [[[CPersistantData sharedManager] tempvotes] addObject:@"neverwanted"];
+                if (CVoteService::getInstance()->doVote(4)) {
+                    [[[CPersistantData sharedManager] tempvotes] addObject:@"neverwanted"];
+                }
             }
         }
         
@@ -319,7 +338,9 @@ void CVoteView::touchDown(ofTouchEventArgs & touch) {
         startTimer(timertime);
         if([[[CPersistantData sharedManager] tempvotes] count]<5) {
             if (!checkifVoteIsClicked(@"dragonking")) {
-                [[[CPersistantData sharedManager] tempvotes] addObject:@"dragonking"];
+                if (CVoteService::getInstance()->doVote(5)) {
+                    [[[CPersistantData sharedManager] tempvotes] addObject:@"dragonking"];
+                }
             }
         }
         
@@ -328,7 +349,9 @@ void CVoteView::touchDown(ofTouchEventArgs & touch) {
         startTimer(timertime);
         if([[[CPersistantData sharedManager] tempvotes] count]<5) {
             if (!checkifVoteIsClicked(@"crazynights")) {
-                [[[CPersistantData sharedManager] tempvotes] addObject:@"crazynights"];
+                if (CVoteService::getInstance()->doVote(6)) {
+                    [[[CPersistantData sharedManager] tempvotes] addObject:@"crazynights"];
+                }
             }
         }
         
@@ -337,7 +360,9 @@ void CVoteView::touchDown(ofTouchEventArgs & touch) {
         startTimer(timertime);
         if([[[CPersistantData sharedManager] tempvotes] count]<5) {
             if (!checkifVoteIsClicked(@"broken")) {
-                [[[CPersistantData sharedManager] tempvotes] addObject:@"broken"];
+                if (CVoteService::getInstance()->doVote(7)) {
+                    [[[CPersistantData sharedManager] tempvotes] addObject:@"broken"];
+                }
             }
         }
         
@@ -346,7 +371,9 @@ void CVoteView::touchDown(ofTouchEventArgs & touch) {
         startTimer(timertime);
         if([[[CPersistantData sharedManager] tempvotes] count]<5) {
             if (!checkifVoteIsClicked(@"quijesuis")) {
-                [[[CPersistantData sharedManager] tempvotes] addObject:@"quijesuis"];
+                if (CVoteService::getInstance()->doVote(8)) {
+                    [[[CPersistantData sharedManager] tempvotes] addObject:@"quijesuis"];
+                }
             }
         }
         
@@ -355,7 +382,9 @@ void CVoteView::touchDown(ofTouchEventArgs & touch) {
         startTimer(timertime);
         if([[[CPersistantData sharedManager] tempvotes] count]<5) {
             if (!checkifVoteIsClicked(@"ambassador")) {
-                [[[CPersistantData sharedManager] tempvotes] addObject:@"ambassador"];
+                if (CVoteService::getInstance()->doVote(9)) {
+                    [[[CPersistantData sharedManager] tempvotes] addObject:@"ambassador"];
+                }
             }
         }
         

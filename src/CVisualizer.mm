@@ -29,7 +29,7 @@ void CVisualizer::setup() {
     cam.setDistance(120);
     //sphere.setUseVbo(true);
     setTexture("images/textures/texture.jpg");
-    setScale(3);
+    setScale(4);
     setRotation(0.3);
     setScene(3);
 }
@@ -55,9 +55,9 @@ void CVisualizer::draw() {
     sphere.pan((audio*3) * speed);
     
     //ofEnableAlphaBlending();
-    //ofEnableBlendMode(OF_BLENDMODE_ADD);
+    //ofEnableBlendMode(OF_BLENDMODE_SCREEN);
     ofEnableAlphaBlending();
-    ofSetColor(255, 255, 254,200);
+    ofSetColor(255, 255, 254,180);
     cam.begin();
         ofEnableDepthTest();
             texture.bind();

@@ -70,6 +70,8 @@ testApp *myApp;
     myApp = (testApp*)ofGetAppPtr();*/
     
     myApp = (testApp*)ofGetAppPtr();
+    
+    interruptedOnPlayback = false;
 }
 
 
@@ -110,7 +112,6 @@ testApp *myApp;
     //self.audioPlayer.volume = 0;
     
     [audioPlayer release]; // release the audio safely
-    
     audioPlayer.delegate = self;
     [audioPlayer setMeteringEnabled:true];
     [audioPlayer prepareToPlay];
@@ -186,6 +187,7 @@ testApp *myApp;
     if (currentsong>9) {
         currentsong =0;
     }
+    
     [[CPersistantData sharedManager] setCurrentsong:currentsong];
     [[CPersistantData sharedManager] saveData];
     [self playSongWithid:currentsong];
@@ -199,6 +201,19 @@ testApp *myApp;
     
     if (player == audioPlayer) {
         [self  playNextSong];
+    }
+}
+
+- (void) audioPlayerBeginInterruption: (AVAudioPlayer *) player {
+        interruptedOnPlayback = true;
+}
+
+- (void) audioPlayerEndInterruption: (AVAudioPlayer *) player {
+    
+    if (interruptedOnPlayback) {
+        [self.audioPlayer prepareToPlay];
+        [self.audioPlayer play];
+        interruptedOnPlayback = false;
     }
 }
 

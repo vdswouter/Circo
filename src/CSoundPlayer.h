@@ -34,6 +34,8 @@
     bool fireonethirdofthesong;
     bool firemiddleofthesong;
     bool firethreefourthofthesong;
+    
+    bool  interruptedOnPlayback;
 }
 
 

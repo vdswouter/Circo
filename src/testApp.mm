@@ -1,6 +1,4 @@
 #include "testApp.h"
-
-
 //--------------------------------------------------------------
 void testApp::setup(){
     
@@ -12,6 +10,7 @@ void testApp::setup(){
     
     //set orientation
     ofSetOrientation(OF_ORIENTATION_90_RIGHT);
+    [[UIApplication sharedApplication] setStatusBarOrientation:UIInterfaceOrientationLandscapeRight];
     
     //always set up background
     backgroundlayer.setup();
