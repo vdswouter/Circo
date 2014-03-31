@@ -7,7 +7,7 @@
 //
 
 #import "CSoundPlayer.h"
-
+#include "CRandomGen.h"
 
 
 static CSoundPlayer *sharedMyManager = nil;
@@ -18,6 +18,7 @@ testApp *myApp;
 
 @synthesize audioPlayer;
 @synthesize introvoiceplayer;
+@synthesize intermezplayer;
 @synthesize thescale;
 @synthesize currentsong;
 
@@ -92,9 +93,9 @@ testApp *myApp;
 
 -(void) playSongWithid:(int)incid {
     
-     fireonethirdofthesong = false;
-     firemiddleofthesong = false;
-     firethreefourthofthesong = false;
+    fireonethirdofthesong = false;
+    firemiddleofthesong = false;
+    firethreefourthofthesong = false;
     
     currentsong = incid;
     
@@ -117,9 +118,46 @@ testApp *myApp;
     [audioPlayer prepareToPlay];
     [audioPlayer setNumberOfLoops:0];
     [audioPlayer play];
+    
+    int rand = CRandomGen::random_in_range_int(0, 101);
+    doFade = false;
+    
+    /*if (rand>80) {
+        int randommez = CRandomGen::random_in_range_int(0,[[[OBJCDataModel sharedManager] intermez] count]);
+        
+        NSURL *audioFileURLMez = [[NSBundle mainBundle] URLForResource: [[[OBJCDataModel sharedManager] intermez] objectAtIndex:randommez] withExtension:@"mp3"];
+        
+        AVAudioPlayer * newAudioMez=[[AVAudioPlayer alloc] initWithContentsOfURL:audioFileURLMez error:NULL];
+        self.intermezplayer = newAudioMez;
+        
+        [intermezplayer release]; // release the audio safely
+        intermezplayer.delegate = self;
+        [intermezplayer setMeteringEnabled:false];
+        [intermezplayer prepareToPlay];
+        [intermezplayer setNumberOfLoops:0];
+        [intermezplayer play];
+        
+        self.audioPlayer.volume = 0.2;
+        
+        fader=0.2;
+        
+    }*/
+    
+      self.audioPlayer.volume = 0;
 }
 
 -(void) update {
+    
+    if (doFade) {
+        fader+=0.01;
+        
+         [[self audioPlayer ] setVolume:fader];
+        
+        if (fader>=1.0) {
+            fader=1.0;
+            doFade = false;
+        }
+    }
     
     thescale = 0;
     
@@ -201,6 +239,10 @@ testApp *myApp;
     
     if (player == audioPlayer) {
         [self  playNextSong];
+    }
+    
+    if (player == intermezplayer) {
+        doFade = true;
     }
 }
 

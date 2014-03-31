@@ -14,6 +14,7 @@ static OBJCDataModel *sharedMyManager = nil;
 @implementation OBJCDataModel
 
 @synthesize songs;
+@synthesize intermez;
 
 #pragma mark Singleton Methods
 + (id)sharedManager {
@@ -44,6 +45,8 @@ static OBJCDataModel *sharedMyManager = nil;
 - (id)init {
     if (self = [super init]) {
         songs  =[[NSMutableArray alloc] initWithObjects:@"sound/Sam",@"sound/Nightfever",@"sound/Rejected",@"sound/One By One",@"sound/Never Wanted",@"sound/Dragon King",@"sound/Crazy Nights",@"sound/Broken",@"sound/Qui Je Suis",@"sound/Ambassador", nil];
+        
+        intermez  =[[NSMutableArray alloc] initWithObjects:@"sound/boob",@"sound/callmeapp",@"sound/musicdrink",@"sound/pocket",@"sound/safesex",@"sound/talkabout",@"sound/thxtappping",@"sound/fingernose",@"sound/farted", nil];
     }
     return self;
 }

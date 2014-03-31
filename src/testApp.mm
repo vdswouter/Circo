@@ -3,9 +3,9 @@
 void testApp::setup(){
     
     
-    //ofSetLogLevel(OF_LOG_SILENT);
+    ofSetLogLevel(OF_LOG_SILENT);
     
-    //ofSetFrameRate(60);
+    ofSetFrameRate(60);
     //ofSetVerticalSync(true);
     
     //set orientation
@@ -26,7 +26,7 @@ void testApp::setup(){
     
     //always set up these
     //1. set up acces to phot lib. This can take a few seconds
-    [[CPLibrary sharedManager] setup];
+    //[[CPLibrary sharedManager] setup];
     //2. data model for band images
     CDataModel::getInstance()->setup();
     //3. the sound player
@@ -143,22 +143,25 @@ void testApp::exit(){
 
 //--------------------------------------------------------------
 void testApp::touchDown(ofTouchEventArgs & touch){
-    
-    if (!btapTimerIsRunning) {
-        btapTimerIsRunning = true;
-        tapstartime = ofGetElapsedTimeMillis();
-        tapendtime = 200;
-        btapTimerReached = false;
-    } else {
-        btapTimerIsRunning = false;
-        btapTimerReached = true;
-    }
-    
-    if (touch.id>0) {
-        float f=0;
-        twitterTimerGO(f);
+    if (CDataModel::getInstance()->screenmode == VISUALIZER_SCREEN || CDataModel::getInstance()->screenmode == VOICE_INTRO_SCREEN) {
+        if (!btapTimerIsRunning) {
+            btapTimerIsRunning = true;
+            tapstartime = ofGetElapsedTimeMillis();
+            tapendtime = 200;
+            btapTimerReached = false;
+        } else {
+            btapTimerIsRunning = false;
+            btapTimerReached = true;
+        }
         
+        if (touch.id==2) {
+            btapTimerIsRunning = false;
+            btapTimerReached = true;
+            float f=0;
+            twitterTimerGO(f);
+        }
     }
+    
 }
 
 //--------------------------------------------------------------
@@ -234,7 +237,7 @@ void testApp::introvoicedone() {
 
 void testApp::bootforreal() {
     
-   
+    
     
     [[CSoundPlayer sharedManager]playSongWithid: [[CPersistantData sharedManager] currentsong]];
     
@@ -254,7 +257,7 @@ void testApp::removeNavigationView(float &f){
 }
 
 void testApp::twitterTimerGO(float &f) {
-
+    
     
     if (CDataModel::getInstance()->screenmode == VISUALIZER_SCREEN) {
         

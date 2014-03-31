@@ -25,13 +25,13 @@ CVisualizer* CVisualizer::getInstance() {
 }
 
 void CVisualizer::setup() {
-    totalscenes = 4;
+    totalscenes = 3;
     cam.setDistance(120);
     //sphere.setUseVbo(true);
     setTexture("images/textures/texture.jpg");
     setScale(4);
-    setRotation(0.3);
-    setScene(3);
+    setRotation(0.4);
+    setScene(0);
 }
 
 void CVisualizer::update() {
@@ -66,7 +66,7 @@ void CVisualizer::draw() {
                 case 0: drawScene0(); break;
                 case 1: drawScene1(); break;
                 case 2: drawScene2(); break;
-                case 3: drawScene3(); break;
+                //case 3: drawScene3(); break;
             }
     
             switched = false;

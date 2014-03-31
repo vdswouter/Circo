@@ -92,6 +92,7 @@ void CBGContainer::startFadeOut() {
 
 
 void CBGContainer::insertTweetPicture(string _path) {
-    twitterpicture.changeImage(_path);
-    image = &twitterpicture.current;
+    if (twitterpicture.changeImage(_path)) {
+        image = &twitterpicture.current;
+    }
 }

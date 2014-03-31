@@ -25,8 +25,7 @@ private:
     ofShader    contrastshader;
     
     ofxThreadedImageLoader loader;
-    
-    bool    bisAllocated;
+
     
 public:
     
@@ -34,7 +33,7 @@ public:
     void setup();
     void update();
     void draw();
-    void changeImage(string _path);
+    bool changeImage(string _path);
     
     ofEvent<float> twitterPictureLoaded;
     

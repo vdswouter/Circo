@@ -163,6 +163,7 @@ void CTrackView::update() {
 void CTrackView::draw() {
     
     ofEnableAlphaBlending();
+    
     if (fadein) {
         ofSetColor(255, 255, 254, fadeval);
         
@@ -191,57 +192,51 @@ void CTrackView::draw() {
     
     image.draw(0, 0, ofGetWidth(),ofGetHeight());
     
-    ofSetColor(255, 255, 254, fadeval);
     
-    for (int i=0;i<CDataModel::getInstance()->songreferences.size();++i) {
-        
-        string incoming =CDataModel::getInstance()->songreferences[[[CSoundPlayer sharedManager] currentsong]];
-        
-        if (incoming=="sam") {
-            star.draw(sam.x-(65/2), sam.y-6, 65/2,60/2);
-        }
-        
-        if (incoming=="nightfever") {
-            star.draw(nightfever.x-(65/2), nightfever.y-6, 65/2,60/2);
-        }
-        
-        if (incoming=="rejected") {
-            star.draw(rejected.x-(65/2), rejected.y-6, 65/2,60/2);
-        }
-        
-        if (incoming=="onebyone") {
-            star.draw(onebyone.x-(65/2), onebyone.y-6, 65/2,60/2);
-        }
-        
-        if (incoming=="neverwanted") {
-            star.draw(neverwanted.x-(65/2), neverwanted.y-6, 65/2,60/2);
-        }
-        
-        if (incoming=="dragonking") {
-            star.draw(dragonking.x-(65/2), dragonking.y-6, 65/2,60/2);
-        }
-        
-        if (incoming=="crazynights") {
-            star.draw(crazynights.x-(65/2), crazynights.y-6, 65/2,60/2);
-        }
-        
-        if (incoming=="broken") {
-            star.draw(broken.x-(65/2), broken.y-6, 65/2,60/2);
-        }
-        
-        if (incoming=="quijesuis") {
-            star.draw(quijesuis.x-(65/2), quijesuis.y-6, 65/2,60/2);
-        }
-        
-        if (incoming=="ambassador") {
-            star.draw(ambassador.x-(65/2), ambassador.y-6, 65/2,60/2);
-        }
+    string incoming =CDataModel::getInstance()->songreferences[[[CSoundPlayer sharedManager] currentsong]];
+    
+    if (incoming=="sam") {
+        star.draw(sam.x-(65/2)+(70/2), sam.y-5, 65/2,60/2);
+    }
+    
+    if (incoming=="nightfever") {
+        star.draw(nightfever.x-(65/2)+(30/2), nightfever.y-3, 65/2,60/2);
+    }
+    
+    if (incoming=="rejected") {
+        star.draw(rejected.x-(65/2)+(45/2), rejected.y-3, 65/2,60/2);
+    }
+    
+    if (incoming=="onebyone") {
+        star.draw(onebyone.x-(65/2)+(30/2), onebyone.y-3, 65/2,60/2);
+    }
+    
+    if (incoming=="neverwanted") {
+        star.draw(neverwanted.x-(65/2), neverwanted.y-3, 65/2,60/2);
+    }
+    
+    if (incoming=="dragonking") {
+        star.draw(dragonking.x-(65/2)+(30/2), dragonking.y-3, 65/2,60/2);
+    }
+    
+    if (incoming=="crazynights") {
+        star.draw(crazynights.x-(65/2)+(20/2), crazynights.y-5, 65/2,60/2);
+    }
+    
+    if (incoming=="broken") {
+        star.draw(broken.x-(65/2)+(70/2), broken.y-5, 65/2,60/2);
+    }
+    
+    if (incoming=="quijesuis") {
+        star.draw(quijesuis.x-(65/2)+(30/2), quijesuis.y-5, 65/2,60/2);
+    }
+    
+    if (incoming=="ambassador") {
+        star.draw(ambassador.x-(65/2)+(20/2), ambassador.y-4, 65/2,60/2);
     }
     
     ofDisableAlphaBlending();
-    
     ofSetColor(255, 255, 255,255);
-    
 }
 
 
@@ -253,7 +248,7 @@ void CTrackView::touchDown(ofTouchEventArgs & touch) {
         
     } else if (nightfever.inside(touch.x, touch.y)) {
         [[CSoundPlayer sharedManager]playSongWithid:1];
-       startFadeOut();
+        startFadeOut();
         
     } else if (rejected.inside(touch.x, touch.y)) {
         [[CSoundPlayer sharedManager]playSongWithid:2];
@@ -265,15 +260,15 @@ void CTrackView::touchDown(ofTouchEventArgs & touch) {
         
     } else if (neverwanted.inside(touch.x, touch.y)) {
         [[CSoundPlayer sharedManager]playSongWithid:4];
-       startFadeOut();
+        startFadeOut();
         
     } else if (dragonking.inside(touch.x, touch.y)) {
         [[CSoundPlayer sharedManager]playSongWithid:5];
-       startFadeOut();
+        startFadeOut();
         
     } else if (crazynights.inside(touch.x, touch.y)) {
         [[CSoundPlayer sharedManager]playSongWithid:6];
-       startFadeOut();
+        startFadeOut();
         
     } else if (broken.inside(touch.x, touch.y)) {
         [[CSoundPlayer sharedManager]playSongWithid:7];
@@ -285,7 +280,7 @@ void CTrackView::touchDown(ofTouchEventArgs & touch) {
         
     } else if (ambassador.inside(touch.x, touch.y)) {
         [[CSoundPlayer sharedManager]playSongWithid:9];
-       startFadeOut();
+        startFadeOut();
         
     } else if (closecross.inside(touch.x, touch.y)) {
         startFadeOut();

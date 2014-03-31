@@ -11,9 +11,11 @@
 
 @interface OBJCDataModel : NSObject {
     NSMutableArray *songs;
+    NSMutableArray *intermez;
 }
 
 @property (nonatomic, retain) NSMutableArray *songs;
+@property (nonatomic, retain) NSMutableArray *intermez;
 
 + (id)sharedManager;
 

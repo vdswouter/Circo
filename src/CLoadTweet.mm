@@ -21,35 +21,39 @@ void CLoadTweet::loadTweet() {
 	// Now parse the JSON
 	bool parsingSuccessful = result.open(url);
     
+    if (result.size()>0) {
+        
+        if (parsingSuccessful) {
+            //don't know what i am doing here
+            //took me 2 hours to get this parsed into a simple string
+            int n = CRandomGen::random_in_range_int(0, result.size());
+            
+            Json::Value& slot = result[n];
+            
+            //get content
+            Json::Value jcontent;
+            jcontent = slot.get("content", jcontent);
+            message = ofSplitString(jcontent.asString(), "http")[0];
+            
+            //get username
+            Json::Value juser;
+            juser = slot.get("displayName", juser);
+            user  = juser.asString();
+            //get image
+            Json::Value jimage;
+            jimage = slot.get("image", jimage);
+            picture  = jimage.asString();
+            
+            float f = 0;
+            ofNotifyEvent(tweetLoaded,f,this);
+            return;
+            
+        } else {
+            float f = 0;
+            ofNotifyEvent(tweetNotLoaded,f,this);
+            return;
+        }
+    }
     
-	if (parsingSuccessful) {
-        //don't know what i am doing here
-        //took me 2 hours to get this parsed into a simple string
-        int n = CRandomGen::random_in_range_int(0, result.size()-1);
-        
-        Json::Value& slot = result[n];
-        
-        //get content
-        Json::Value jcontent;
-        jcontent = slot.get("content", jcontent);
-        message = ofSplitString(jcontent.asString(), "http")[0];
-    
-        //get username
-        Json::Value juser;
-        juser = slot.get("displayName", juser);
-        user  = juser.asString();
-        //get image
-        Json::Value jimage;
-        jimage = slot.get("image", jimage);
-        picture  = jimage.asString();
-        
-        float f = 0;
-        ofNotifyEvent(tweetLoaded,f,this);
-        return;
-        
-	} else {
-        float f = 0;
-        ofNotifyEvent(tweetNotLoaded,f,this);
-        return;
-	}
+    result.clear();
 }

@@ -199,45 +199,44 @@ void CVoteView::draw() {
         
         string incoming = string([[[[CPersistantData sharedManager] tempvotes] objectAtIndex:i] UTF8String]);
         
-        
         if (incoming=="sam") {
-            star.draw(sam.x-(65/2), sam.y-6, 65/2,60/2);
+            star.draw(sam.x-(65/2)+(70/2), sam.y-5, 65/2,60/2);
         }
         
         if (incoming=="nightfever") {
-            star.draw(nightfever.x-(65/2), nightfever.y-6, 65/2,60/2);
+            star.draw(nightfever.x-(65/2)+(30/2), nightfever.y-3, 65/2,60/2);
         }
         
         if (incoming=="rejected") {
-            star.draw(rejected.x-(65/2), rejected.y-6, 65/2,60/2);
+            star.draw(rejected.x-(65/2)+(45/2), rejected.y-3, 65/2,60/2);
         }
         
         if (incoming=="onebyone") {
-            star.draw(onebyone.x-(65/2), onebyone.y-6, 65/2,60/2);
+            star.draw(onebyone.x-(65/2)+(30/2), onebyone.y-3, 65/2,60/2);
         }
         
         if (incoming=="neverwanted") {
-            star.draw(neverwanted.x-(65/2), neverwanted.y-6, 65/2,60/2);
+            star.draw(neverwanted.x-(65/2), neverwanted.y-3, 65/2,60/2);
         }
         
         if (incoming=="dragonking") {
-            star.draw(dragonking.x-(65/2), dragonking.y-6, 65/2,60/2);
+            star.draw(dragonking.x-(65/2)+(30/2), dragonking.y-3, 65/2,60/2);
         }
         
         if (incoming=="crazynights") {
-            star.draw(crazynights.x-(65/2), crazynights.y-6, 65/2,60/2);
+            star.draw(crazynights.x-(65/2)+(20/2), crazynights.y-5, 65/2,60/2);
         }
         
         if (incoming=="broken") {
-            star.draw(broken.x-(65/2), broken.y-6, 65/2,60/2);
+            star.draw(broken.x-(65/2)+(70/2), broken.y-5, 65/2,60/2);
         }
         
         if (incoming=="quijesuis") {
-            star.draw(quijesuis.x-(65/2), quijesuis.y-6, 65/2,60/2);
+            star.draw(quijesuis.x-(65/2)+(30/2), quijesuis.y-5, 65/2,60/2);
         }
         
         if (incoming=="ambassador") {
-            star.draw(ambassador.x-(65/2), ambassador.y-6, 65/2,60/2);
+            star.draw(ambassador.x-(65/2)+(20/2), ambassador.y-4, 65/2,60/2);
         }
     }
     
@@ -278,8 +277,8 @@ void CVoteView::touchDown(ofTouchEventArgs & touch) {
                     [[[CPersistantData sharedManager] tempvotes] addObject:@"sam"];
                 } else {
                  
-                    UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:@"ROFL"
-                                                                    message:@"Dee dee doo doo."
+                    UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:@"OOPS"
+                                                                    message:@"No internets, No vote for you!"
                                                                    delegate:nil
                                                           cancelButtonTitle:@"OK"
                                                           otherButtonTitles:nil] autorelease];
@@ -295,6 +294,14 @@ void CVoteView::touchDown(ofTouchEventArgs & touch) {
             if (!checkifVoteIsClicked(@"nightfever")) {
                 if (CVoteService::getInstance()->doVote(1)) {
                     [[[CPersistantData sharedManager] tempvotes] addObject:@"nightfever"];
+                }else {
+                    
+                    UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:@"OOPS"
+                                                                     message:@"No internets, No vote for you!"
+                                                                    delegate:nil
+                                                           cancelButtonTitle:@"OK"
+                                                           otherButtonTitles:nil] autorelease];
+                    [alert show];
                 }
             }
         }
@@ -307,6 +314,14 @@ void CVoteView::touchDown(ofTouchEventArgs & touch) {
             if (!checkifVoteIsClicked(@"rejected")) {
                 if (CVoteService::getInstance()->doVote(2)) {
                     [[[CPersistantData sharedManager] tempvotes] addObject:@"rejected"];
+                }else {
+                    
+                    UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:@"OOPS"
+                                                                     message:@"No internets, No vote for you!"
+                                                                    delegate:nil
+                                                           cancelButtonTitle:@"OK"
+                                                           otherButtonTitles:nil] autorelease];
+                    [alert show];
                 }
             }
         }
@@ -318,6 +333,14 @@ void CVoteView::touchDown(ofTouchEventArgs & touch) {
             if (!checkifVoteIsClicked(@"onebyone")) {
                 if (CVoteService::getInstance()->doVote(3)) {
                     [[[CPersistantData sharedManager] tempvotes] addObject:@"onebyone"];
+                }else {
+                    
+                    UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:@"OOPS"
+                                                                     message:@"No internets, No vote for you!"
+                                                                    delegate:nil
+                                                           cancelButtonTitle:@"OK"
+                                                           otherButtonTitles:nil] autorelease];
+                    [alert show];
                 }
             }
         }
@@ -340,6 +363,14 @@ void CVoteView::touchDown(ofTouchEventArgs & touch) {
             if (!checkifVoteIsClicked(@"dragonking")) {
                 if (CVoteService::getInstance()->doVote(5)) {
                     [[[CPersistantData sharedManager] tempvotes] addObject:@"dragonking"];
+                }else {
+                    
+                    UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:@"OOPS"
+                                                                     message:@"No internets, No vote for you!"
+                                                                    delegate:nil
+                                                           cancelButtonTitle:@"OK"
+                                                           otherButtonTitles:nil] autorelease];
+                    [alert show];
                 }
             }
         }
@@ -351,6 +382,14 @@ void CVoteView::touchDown(ofTouchEventArgs & touch) {
             if (!checkifVoteIsClicked(@"crazynights")) {
                 if (CVoteService::getInstance()->doVote(6)) {
                     [[[CPersistantData sharedManager] tempvotes] addObject:@"crazynights"];
+                }else {
+                    
+                    UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:@"OOPS"
+                                                                     message:@"No internets, No vote for you!"
+                                                                    delegate:nil
+                                                           cancelButtonTitle:@"OK"
+                                                           otherButtonTitles:nil] autorelease];
+                    [alert show];
                 }
             }
         }
@@ -362,6 +401,14 @@ void CVoteView::touchDown(ofTouchEventArgs & touch) {
             if (!checkifVoteIsClicked(@"broken")) {
                 if (CVoteService::getInstance()->doVote(7)) {
                     [[[CPersistantData sharedManager] tempvotes] addObject:@"broken"];
+                }else {
+                    
+                    UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:@"OOPS"
+                                                                     message:@"No internets, No vote for you!"
+                                                                    delegate:nil
+                                                           cancelButtonTitle:@"OK"
+                                                           otherButtonTitles:nil] autorelease];
+                    [alert show];
                 }
             }
         }
@@ -373,6 +420,14 @@ void CVoteView::touchDown(ofTouchEventArgs & touch) {
             if (!checkifVoteIsClicked(@"quijesuis")) {
                 if (CVoteService::getInstance()->doVote(8)) {
                     [[[CPersistantData sharedManager] tempvotes] addObject:@"quijesuis"];
+                }else {
+                    
+                    UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:@"OOPS"
+                                                                     message:@"No internets, No vote for you!"
+                                                                    delegate:nil
+                                                           cancelButtonTitle:@"OK"
+                                                           otherButtonTitles:nil] autorelease];
+                    [alert show];
                 }
             }
         }
@@ -384,6 +439,14 @@ void CVoteView::touchDown(ofTouchEventArgs & touch) {
             if (!checkifVoteIsClicked(@"ambassador")) {
                 if (CVoteService::getInstance()->doVote(9)) {
                     [[[CPersistantData sharedManager] tempvotes] addObject:@"ambassador"];
+                }else {
+                    
+                    UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:@"OOPS"
+                                                                     message:@"No internets, No vote for you!"
+                                                                    delegate:nil
+                                                           cancelButtonTitle:@"OK"
+                                                           otherButtonTitles:nil] autorelease];
+                    [alert show];
                 }
             }
         }

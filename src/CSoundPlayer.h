@@ -25,11 +25,16 @@
     
     AVAudioPlayer *introvoiceplayer;
     
+    AVAudioPlayer *intermezplayer;
+    
     int currentsong;
     
     MeterTable meterTable;
     
     float thescale;
+    
+    float fader;
+    bool doFade;
     
     bool fireonethirdofthesong;
     bool firemiddleofthesong;
@@ -54,6 +59,7 @@
 
 @property (nonatomic, retain) AVAudioPlayer *audioPlayer;
 @property (nonatomic, retain) AVAudioPlayer *introvoiceplayer;
+@property (nonatomic, retain) AVAudioPlayer *intermezplayer;
 @property int currentsong;
 
 @property float thescale;

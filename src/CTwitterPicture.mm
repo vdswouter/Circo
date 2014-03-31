@@ -8,6 +8,8 @@
 
 #include "CTwitterPicture.h"
 
+#import "Reachability.h"
+
 
 
 void CTwitterPicture::setup() {
@@ -19,7 +21,6 @@ void CTwitterPicture::setup() {
     
     contrastfbo.allocate(ofGetWidth(), ofGetHeight());
     
-    bisAllocated = false;
 }
 
 void CTwitterPicture::update() {
@@ -47,9 +48,38 @@ void CTwitterPicture::draw() {
     
 }
 
-void CTwitterPicture::changeImage(string _path) {
+bool CTwitterPicture::changeImage(string _path) {
     
+    Reachability *reachability = [Reachability reachabilityForInternetConnection];
+    [reachability startNotifier];
     
+    NetworkStatus status = [reachability currentReachabilityStatus];
+    
+    if(status == NotReachable) {
+        //No internet
+        return false;
+    }
+    else if (status == ReachableViaWiFi) {
+        //WiFi
+        image.loadImage(_path);
+        current.begin();
+        contrastshader.begin();
+        contrastshader.setUniform1f("contrast", 4);
+        contrastshader.setUniform1f("alpha", 0.4);
+        image.draw(0, 0, ofGetWidth(),ofGetHeight());
+        contrastshader.end();
+        current.end();
+        return true;
+
+    }
+    else if (status == ReachableViaWWAN) 
+    {
+        return false;
+        //3G
+        //cout<<"3G"<<endl;
+    }
+    [reachability stopNotifier];
+    /*
     //image.clear();
     image.loadImage(_path);
     //image.clear();
@@ -65,7 +95,7 @@ void CTwitterPicture::changeImage(string _path) {
      contrastshader.end();
      current.end();
     
-    
+    */
     /*
      current.begin();
      bwshader.begin();
