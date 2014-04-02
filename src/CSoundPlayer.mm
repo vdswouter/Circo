@@ -122,7 +122,7 @@ testApp *myApp;
     int rand = CRandomGen::random_in_range_int(0, 101);
     doFade = false;
     
-    /*if (rand>80) {
+    if (rand>80) {
         int randommez = CRandomGen::random_in_range_int(0,[[[OBJCDataModel sharedManager] intermez] count]);
         
         NSURL *audioFileURLMez = [[NSBundle mainBundle] URLForResource: [[[OBJCDataModel sharedManager] intermez] objectAtIndex:randommez] withExtension:@"mp3"];
@@ -141,9 +141,7 @@ testApp *myApp;
         
         fader=0.2;
         
-    }*/
-    
-      self.audioPlayer.volume = 0;
+    }
 }
 
 -(void) update {

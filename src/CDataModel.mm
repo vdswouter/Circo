@@ -26,7 +26,7 @@ CDataModel* CDataModel::getInstance() {
 
 void CDataModel::setup() {
     
-    for (int i=0;i<28;++i) {
+    for (int i=0;i<31;++i) {
         //string mystring = "images/band/"+ofToString(i)+".png";
         string mystring = "images/band/"+ofToString(i)+".jpg";
         bandpicturespaths.push_back(mystring);

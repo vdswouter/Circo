@@ -19,10 +19,12 @@ CLoadTweet* CLoadTweet::getInstance() {
 void CLoadTweet::loadTweet() {
     std::string url = "http://demo.littlemissrobot.com:2346/getTweets/";
 	// Now parse the JSON
+    
 	bool parsingSuccessful = result.open(url);
     
-    if (result.size()>0) {
-        
+
+      if (result.size()>0) {
+       
         if (parsingSuccessful) {
             //don't know what i am doing here
             //took me 2 hours to get this parsed into a simple string
@@ -47,13 +49,16 @@ void CLoadTweet::loadTweet() {
             float f = 0;
             ofNotifyEvent(tweetLoaded,f,this);
             return;
-            
         } else {
             float f = 0;
             ofNotifyEvent(tweetNotLoaded,f,this);
             return;
         }
-    }
+      } else {
+          float f = 0;
+          ofNotifyEvent(tweetNotLoaded,f,this);
+          return;
+      }
     
     result.clear();
 }
