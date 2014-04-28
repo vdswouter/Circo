@@ -32,6 +32,8 @@ void CDataModel::setup() {
         bandpicturespaths.push_back(mystring);
     }
     
+    //bandpicturespaths.push_back("images/band/6.jpg");
+    
     songtitles.push_back("S.A.M");
     songtitles.push_back("Nightfever");
     songtitles.push_back("Rejected");

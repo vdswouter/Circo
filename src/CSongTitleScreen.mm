@@ -32,7 +32,7 @@ void CSongTitleScreen::draw() {
     
     if (bdraw) {
         
-        if (counter<4) {
+        if (counter<3) {
             string song = CDataModel::getInstance()->songtitles[[[CSoundPlayer sharedManager] currentsong]];
             
             ofRectangle rect = NCFontController::getInstance()->nanum30.getStringBoundingBox("you are listening to "+song+" by ..Circo",0, 0);
@@ -49,7 +49,6 @@ void CSongTitleScreen::draw() {
         }
         
     }
-    
 }
 
 

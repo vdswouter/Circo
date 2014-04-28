@@ -26,7 +26,6 @@ class CBackGroundLayer {
     
     void startWithBAndPicture();
 
-    
 private:
 
     

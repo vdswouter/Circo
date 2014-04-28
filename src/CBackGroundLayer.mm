@@ -5,7 +5,6 @@
 //  Created by Wim Vanhenden on 14/03/14.
 //
 //
-
 #include "CBackGroundLayer.h"
 
 void CBackGroundLayer::setup() {

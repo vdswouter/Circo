@@ -35,10 +35,7 @@ public:
     
     ofEvent<float> twitterTimerTrigger;
     
-    
     void startTimers();
     void stopTimers();
-    
-    
     
 };

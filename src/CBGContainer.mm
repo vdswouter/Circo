@@ -10,7 +10,6 @@
 
 #include "CRandomGen.h"
 
-
 void CBGContainer::setup() {
     fadeshader.load("shaders/FadeShader");
     bandpicture.setup();

@@ -82,7 +82,7 @@ void CTwitterScreen::draw() {
     slitrender.draw(0, 0);
     
     ofRectangle rect = NCFontController::getInstance()->nanum30.getStringBoundingBox("ALERT! TRENDING TWEET..."+CLoadTweet::getInstance()->message+" by "+CLoadTweet::getInstance()->user,0, 0);
-    tweetxpos+=4;
+    tweetxpos+=6;
     if (tweetxpos>ofGetWidth()+rect.width) {
         tweetxpos = 0;
     }

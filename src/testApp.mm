@@ -237,8 +237,6 @@ void testApp::introvoicedone() {
 
 void testApp::bootforreal() {
     
-    
-    
     [[CSoundPlayer sharedManager]playSongWithid: [[CPersistantData sharedManager] currentsong]];
     
     CDataModel::getInstance()->screenmode = VISUALIZER_SCREEN;
@@ -257,10 +255,7 @@ void testApp::removeNavigationView(float &f){
 }
 
 void testApp::twitterTimerGO(float &f) {
-    
-    
     if (CDataModel::getInstance()->screenmode == VISUALIZER_SCREEN) {
-        
         if (twitterview==NULL) {
             twitterview = new CTwitterScreen();
             ofAddListener(twitterview->twitterScreenDone, this, &testApp::twitterScreenRemove);
