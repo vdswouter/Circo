@@ -63,16 +63,31 @@ testApp *myApp;
 
 -(void) setup {
     currentsong = 0;
+    myApp = (testApp*)ofGetAppPtr();
+    interruptedOnPlayback = false;
+    
     /*NSError *setCategoryError = nil;
     NSError *activationError = nil;
     [[AVAudioSession sharedInstance] setActive:YES error:&activationError];
     [[AVAudioSession sharedInstance] setDelegate:self];
     [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:&setCategoryError];
-    myApp = (testApp*)ofGetAppPtr();*/
+    */
+  
     
-    myApp = (testApp*)ofGetAppPtr();
+    //MPMediaItemArtwork *artwork = [[MPMediaItemArtwork alloc] initWithImage:@"" InDirectory:@"img" DoYouWantImageView:NO]];
     
-    interruptedOnPlayback = false;
+    //dictionary met textuele data.
+    /*NSDictionary *streamInfo = @{
+                                 MPMediaItemPropertyTitle: @"Klara Overal Livestream",
+                                 MPMediaItemPropertyArtist: @"Klara",
+                                 MPMediaItemPropertyAlbumTitle: @"Klara Overal",
+                                 MPMediaItemPropertyAlbumArtist: @"Klara",
+                                 };*/
+    
+    //data sturen naar even.
+    //[[MPNowPlayingInfoCenter defaultCenter] setNowPlayingInfo:streamInfo];
+    
+
 }
 
 
